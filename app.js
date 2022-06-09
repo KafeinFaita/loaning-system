@@ -4,6 +4,8 @@ const app = express()
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 
+const getRoutes = require('./routes/getRoutes')
+const postRoutes = require('./routes/postRoutes')
 
 const port = process.env.port || 3000
 
@@ -27,7 +29,16 @@ app.set('view engine', 'ejs')
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }))
+
+app.use(getRoutes)
+app.use(postRoutes)
 
 app.get('/', (req, res) => {
     res.render('index')
 })
+
+app.get('/signup', (req, res) => {
+    res.render('signup')
+})
+
