@@ -11,14 +11,20 @@ const createToken = id => {
 }
 
 module.exports.signup_post = async (req, res) => {
+
+    const userExists = await User.findOne({ username: req.body.username })
+    if (userExists) return res.status(409).json('Username is already taken.')
+
+
     const hashedPass = await bcrypt.hash(req.body.password, 10)
     const newUser = new User({ username: req.body.username, password: hashedPass })
 
     try {
         await newUser.save()
-        res.redirect('/')
+        res.status(201).json('Success')
     } catch (error) {
         console.log(error)
+        res.status(409).json('Something went wrong')
     }
 }
 
