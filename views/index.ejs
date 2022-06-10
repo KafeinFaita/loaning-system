@@ -7,6 +7,50 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>HELLO</h1>
+    <h1>LOGIN</h1>
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button>Login</button>
+    </form>
+
+    <p class="msg"></p>
 </body>
+
+<script>
+    const form = document.querySelector('form')
+    const msg = document.querySelector('.msg')
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const username = form.username.value
+        const password = form.password.value
+
+        msg.innerHTML = ""
+
+        try {
+            const response = await fetch('/', {
+                method: 'POST',
+                body: JSON.stringify({ username, password }),
+                headers: { 'Content-Type': 'application/json' }
+
+            })
+            const data = await response.json()
+            
+            if (data.user) {
+                return location.assign('/dashboard')
+            }
+            msg.innerHTML = data
+
+        } catch (error) {
+            console.log(error)
+          
+        }
+    })
+</script>
+
 </html>
