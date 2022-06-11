@@ -1,3 +1,111 @@
+:root {
+    --bg-white: rgb(241, 239, 239);
+}
 .login {
-    color: red;
+    color: #2b2b2b;
+}
+
+* {
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+/* Login page */
+.login__container {
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    background:var(--bg-white);
+}
+.login__subcontainer {
+    background:rgb(255, 255, 255);
+    padding:3em;
+    box-shadow: 5px 5px 5px #2b2b2b;
+    border-radius:5px;
+}
+.login {
+    text-align: center;
+}
+.login__box {
+    display:flex;
+    flex-direction: column;
+}
+.login__form {
+    display:flex;
+    flex-direction:column;
+    gap:1em;
+}
+.login__form label {
+    font-size:0.8em;
+}
+.login__form input {
+    padding:0.75em;
+    border-radius: 2px;
+    border: 1px solid #2b2b2b;
+    outline:none;
+}
+
+body {
+    font-size:18px;
+    font-weight: 500;
+    user-select:none;
+}
+/* Navbar */
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2b2b2b;
+    padding:0.5em;
+    color: #ffff;
+}
+.navbar__content {
+    display:flex;
+    gap:1em;
+    align-items:center;
+}
+.navbar__title {
+    font-weight: 500;
+    font-size:1.2em;
+}
+.navbar__username {
+    font-size:1em;
+    font-weight:500;
+}
+/* Container for pages */
+.container {
+    display:flex;
+    background:rgb(241, 239, 239);
+    height:100% 
+}
+/* Sidebar */
+.sidebar {
+    height: 100vh;
+    background: #2b2b2b;
+    width: 20%;
+    color: #ffff;
+}
+.sidebar__btns {
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+    padding: 1em;
+}
+.sidebar__btns li {
+    list-style: none;
+}
+.sidebar__btns li a {
+    text-decoration: none;
+    color: #ffff;
+}
+/* main */
+main {
+    padding: 1em; 
+    width:100%;
+}
+/* Dashboard */
+.welcome__back {
+    font-size:1.2em;
 }
