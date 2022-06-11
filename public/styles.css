@@ -210,3 +210,13 @@ main {
 .card--receivable {
     background: var(--bg-receivable);
 }
+/* Users page */
+.user__add {
+    position:absolute;
+    bottom:0;
+    right:0;
+    border-radius: 50px;
+    height:2em;
+    width:2em;
+    background:red;
+}
