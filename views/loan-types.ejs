@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>LOAN TYPE FORM</h1>
+
+    <form>     
+        <label for="type">Type:</label>
+        <input type="text" name="type" id="type" required>
+
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" required>
+        
+        <button>Save</button>
+    </form>
+
+
+    <h2>LOAN TYPES</h2>
+
+    <% if (loanTypes.length > 0) { %>
+        <% loanTypes.forEach(lt => { %>
+            <h3>Type Name: <%- lt.type %></h3>
+            <p>Description: <%- lt.description %></p>
+        <% }) %> 
+    <% } %>
+</body>
+
+<script>
+    const form = document.querySelector('form')
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const type = form.type.value
+        const description = form.description.value
+
+        try {
+            const response = await fetch('/loan-types', {
+                method: 'POST',
+                body: JSON.stringify({ type, description }),
+                headers: { 'Content-Type': 'application/json' }
+
+            })
+            const data = await response.json()
+            if (data === 'ok') location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    })
+</script>
+</html>
