@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <%- include('./partials/head.ejs') %>
 <body>
-    <h1 class="login">LOGIN</h1>
-    <form>
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required>
+    <div class="login__container">
+        <div class="login__subcontainer">
+            <h1 class="login">LOGIN</h1>
+            <form class="login__form">
+                <div class="login__box">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <button>Login</button>
-    </form>
+                <div class="login__box">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
 
-    <p class="login-msg"></p>
+                <button>Login</button>
+            </form>
+
+            <p class="login-msg"></p>
+        </div>
+    </div>
 </body>
 
 <script>
