@@ -2,17 +2,26 @@
 <html lang="en">
     <%- include('./partials/head.ejs') %>
 <body>
-    <h1 class="signup">SIGNUP</h1>
-    <form>
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required>
+    <div class="login__container">
+        <div class="login__subcontainer">
+            <h1 class="login">SIGNUP</h1>
+            <form class="login__form">
+                <div class="login__box">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <button>Signup</button>
-    </form>
+                <div class="login__box">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
 
-    <p class="signup-msg"></p>
+                <button>Register</button>
+            </form>
+
+            <p class="signup-msg"></p>
+        </div>
+    </div>
 </body>
 
 <script>
