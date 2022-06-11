@@ -2,12 +2,20 @@
 <html lang="en">
     <%- include('./partials/head.ejs') %>
 <body>
-    <h1>USERS</h1>
-
-    <% if (names.length > 0) { %>
-        <% names.forEach(name => { %>
-            <p><%- name %></p>
-        <% }) %> 
-    <% } %>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container">
+        <%- include('./partials/sidebar.ejs') %>
+        <main>
+            <h1>List of Users</h1>
+            <% if (names.length > 0) { %>
+                <% names.forEach(name => { %>
+                    <p><%- name %></p>
+                <% }) %> 
+            <% } %>
+            <div class="user__add">
+                
+            </div>  
+        </main>
+    </div>
 </body>
 </html>
