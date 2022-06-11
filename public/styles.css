@@ -212,11 +212,23 @@ main {
 }
 /* Users page */
 .user__add {
-    position:absolute;
-    bottom:0;
-    right:0;
+    position:fixed;
+    bottom:1em;
+    right:1em;
     border-radius: 50px;
-    height:2em;
-    width:2em;
-    background:red;
+    height:3em;
+    width:3em;
+    background: #ffff;
+    border: 1px solid #2b2b2b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+.user__add:hover {
+    background: #4a4a4a;
+    transition: 0.2s ease-in-out;
+}
+.user__add svg {
+    width: 1em;
 }
