@@ -76,6 +76,18 @@ body {
     font-weight: 500;
     font-size:1.2em;
 }
+.navbar__user {
+    display:flex;
+    gap:1em;
+}
+.navbar__user button {
+    background:none;
+    color: #ffff;   
+    font-weight:500;
+    font-size:1em;
+    border:none;
+    cursor:pointer;
+}
 .navbar__username {
     font-size:1em;
     font-weight:500;
