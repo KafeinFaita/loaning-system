@@ -1,5 +1,11 @@
+
 :root {
     --bg-white: rgb(241, 239, 239);
+
+    --bg-payments: #007AF7;
+    --bg-borrowers: #28A649;
+    --bg-loans: #FEC417;
+    --bg-receivable: #17A5AA;
 }
 .login {
     color: #2b2b2b;
@@ -57,7 +63,7 @@ body {
     display:flex;
     justify-content: space-between;
     align-items: center;
-    background: #2b2b2b;
+    background: #317ae7;
     padding:0.5em;
     color: #ffff;
 }
@@ -95,6 +101,12 @@ body {
 }
 .sidebar__btns li {
     list-style: none;
+    padding:0.5em;
+    cursor: pointer;
+}
+.sidebar__btns li:hover {
+    background: #4a4a4a;
+    transition: 0.2s ease-in-out;
 }
 .sidebar__btns li a {
     text-decoration: none;
@@ -107,5 +119,42 @@ main {
 }
 /* Dashboard */
 .welcome__back {
-    font-size:1.2em;
+    font-size:1.4em;
+    color: #2b2b2b;
+}
+.counts {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #ffff;
+    gap:2em;
+    margin-top:3em;
+}
+.card {
+    padding:1em;
+    border-radius:0.25em;
+    width: 25%;
+    height:6em;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+.card__title {
+    font-weight:300;
+    font-size:1em;
+}
+.card__number {
+    font-weight:600;
+}
+.card--payments {
+    background: var(--bg-payments);
+}
+.card--borrowers {
+    background: var(--bg-borrowers);
+}
+.card--loans {
+    background: var(--bg-loans);
+}
+.card--receivable {
+    background: var(--bg-receivable);
 }
