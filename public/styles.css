@@ -233,30 +233,43 @@ main {
     background: var(--bg-receivable);
 }
 /* Users page */
+.users {
+    height: fit-content;
+    border-radius:3px;
+    background: #ffff;
+    padding:1em;
+    margin-top:1em;
+}
 .users__title {
     font-size:var(--title-size);
     color: #2b2b2b;
 }
-.user__add {
-    position:fixed;
-    bottom:1em;
-    right:1em;
-    border-radius: 50px;
-    height:3em;
-    width:3em;
-    background: #ffff;
-    border: 1px solid #2b2b2b;
+.users__header {
     display:flex;
-    align-items:center;
-    justify-content:center;
+    justify-content: space-between;
+    align-items: center;
+}
+.users__table {
+    width: 100%;
+    height:fit-content;
+}
+.users__table th {
+    font-weight: 600;
+}
+.users__table td {
+    text-align:center;
+}
+.users__table td:nth-child(2) {
+    text-align: left;
+}
+.users__table button {
+    background: var(--bg-payments);
+    padding:0.6em;
+    color: #ffff;
+    border:none;
+    border-radius:3px;
     cursor:pointer;
-}
-.user__add:hover {
-    background: #4a4a4a;
-    transition: 0.2s ease-in-out;
-}
-.user__add svg {
-    width: 1em;
+    font-weight: 600;
 }
 /* Loan Types Page */
 .loan {
