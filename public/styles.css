@@ -145,16 +145,22 @@ body {
 }
 .sidebar__btns li {
     list-style: none;
-    padding:0.5em;
     cursor: pointer;
+    width:100%;
+    display:flex;
+    gap:0;
+    margin:0;
 }
-.sidebar__btns li:hover {
+.sidebar__btns li a:hover {
     background: #4a4a4a;
     transition: 0.2s ease-in-out;
 }
 .sidebar__btns li a {
     text-decoration: none;
     color: #ffff;
+
+    width:100%;
+    padding:0.5em;
 }
 /* main */
 main {
