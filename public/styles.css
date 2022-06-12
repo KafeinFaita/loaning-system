@@ -403,3 +403,14 @@ main {
     text-align:center;
     padding:0.5em;
 }
+.borrower__table tr {
+    text-align: center;
+}
+.borrower__table tr td:nth-child(2) {
+    display:flex;
+    flex-direction: column;
+    text-align: left;
+    gap:0.5em;
+    font-size: 0.9em;
+    padding:1em;
+}

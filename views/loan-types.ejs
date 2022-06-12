@@ -41,7 +41,7 @@
                                 <span>Description: <%- lt.description %></span>
                             </td>
                             <td>
-                                <button class="loan__types__edit">Edit</button>
+                                <button onclick="editLoanType(`${lt._id}`)" class="loan__types__edit">Edit</button>
                                 <button class="loan__types__delete">Delete</button>
                             </td>
                         </tr>
@@ -54,7 +54,13 @@
 </body>
 
 <script>
-    const form = document.querySelector('.loan__form__submit')
+    const form = document.querySelector('.loan__form__submit');
+    const edit = document.querySelector('.loan__types__edit');
+
+    // Edit the data on click
+    const editLoanType = (id) => {
+        console.log(id);
+    }
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
