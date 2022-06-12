@@ -47,3 +47,8 @@ module.exports.login_post = async (req, res) => {
     return res.json("User doesn't exist!")
 
 }
+
+module.exports.logout_get = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 })
+    res.redirect('/')
+}

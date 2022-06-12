@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const LoanType = require('../models/LoanType')
 
 module.exports.index_get = (req, res) => {
     res.render('index')
@@ -21,4 +22,27 @@ module.exports.users_get = async (req, res) => {
 
 module.exports.dashboard_get = (req, res) => {
     res.render('dashboard')
+}
+
+module.exports.loan_types_get = async (req, res) => {
+
+    try {
+        const loanTypes = await LoanType.find()
+        res.render('loan-types', { loanTypes })
+    } catch (error) {
+        console.log(error)
+    }
+
+    
+}
+
+module.exports.loan_types_post = async (req, res) => {
+    const loanType = new LoanType({ type: req.body.type, description: req.body.description })
+
+    try {
+        await loanType.save()
+        res.status(201).json('ok')
+    } catch (error) {
+        console.log(error)
+    }
 }
