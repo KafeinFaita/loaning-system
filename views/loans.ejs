@@ -6,7 +6,75 @@
     <div class="container">
         <%- include('./partials/sidebar.ejs') %>
         <main>
-            <h1>Loans</h1>
+            <div class="borrower__header">
+                <h1 class="borrower__title">Loans</h1>
+                <button class="borrower__add__borrower">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+                    </svg>Create New Application</button>
+            </div>
+            <div class="borrower">
+                <div class="borrower__filter">
+                    <div class="borrower__entries">
+                        <h2 class="borrower__entries__show">
+                            Show
+                            <select>
+                                <option value="1">1</option>
+                            </select>
+                            entries 
+                        </h2>
+                    </div>
+                    <form class="borrower__search__form">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" placeholder="Search..." required>
+                    </form>
+                </div> 
+
+                <table class="borrower__table">
+                    <tr>
+                        <th>#</th>
+                        <th>Borrower</th>
+                        <th>Loan Details</th>
+                        <th>Next Payment Details</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <span>Name: Andres, Paul D.</span>
+                            <span>Address: Sample Address</span>
+                            <span>Contact #: 09214231007</span>
+                            <span>Email: polopdoandres@gmail.com</span>
+                            <span>Tax ID: 78908-32</span>
+                        </td>
+                        <td>None</td>
+                        <td>N/A</td>
+                        <td>Released</td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <span>Name: Andres, Paul D.</span>
+                            <span>Address: Sample Address</span>
+                            <span>Contact #: 09214231007</span>
+                            <span>Email: polopdoandres@gmail.com</span>
+                            <span>Tax ID: 78908-32</span>
+                        </td>
+                        <td>None</td>
+                        <td>N/A</td>
+                        <td>Released</td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </main>
     </div>
 </body>

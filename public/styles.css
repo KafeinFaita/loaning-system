@@ -7,6 +7,7 @@
     --bg-borrowers: #28A649;
     --bg-loans: #FEC417;
     --bg-receivable: #17A5AA;
+    --bg-dim: rgba(0, 0, 0, 0.475);
 
     --title-size: 1.4em;
 }
@@ -233,30 +234,43 @@ main {
     background: var(--bg-receivable);
 }
 /* Users page */
+.users {
+    height: fit-content;
+    border-radius:3px;
+    background: #ffff;
+    padding:1em;
+    margin-top:1em;
+}
 .users__title {
     font-size:var(--title-size);
     color: #2b2b2b;
 }
-.user__add {
-    position:fixed;
-    bottom:1em;
-    right:1em;
-    border-radius: 50px;
-    height:3em;
-    width:3em;
-    background: #ffff;
-    border: 1px solid #2b2b2b;
+.users__header {
     display:flex;
-    align-items:center;
-    justify-content:center;
+    justify-content: space-between;
+    align-items: center;
+}
+.users__table {
+    width: 100%;
+    height:fit-content;
+}
+.users__table th {
+    font-weight: 600;
+}
+.users__table td {
+    text-align:center;
+}
+.users__table td:nth-child(2) {
+    text-align: left;
+}
+.users__table button {
+    background: var(--bg-payments);
+    padding:0.6em;
+    color: #ffff;
+    border:none;
+    border-radius:3px;
     cursor:pointer;
-}
-.user__add:hover {
-    background: #4a4a4a;
-    transition: 0.2s ease-in-out;
-}
-.user__add svg {
-    width: 1em;
+    font-weight: 600;
 }
 /* Loan Types Page */
 .loan {
@@ -555,4 +569,179 @@ main {
     width:5em;
     height:2.4em;
     font-size:0.8em;
+}
+/* Payments page modal */
+.edit__payment {
+    background: var(--bg-dim);
+    height: 100%;
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index: 100;
+    display:none;
+    justify-content: center;
+    align-items: center;
+}
+.edit__payment__box {
+    background: #ffff;
+    border-radius: 5px;
+    padding:2em;
+    height: fit-content;
+    width: 30em;
+}
+.edit__payment__box form {
+    display:flex;
+    flex-direction:column;
+    gap:1em;
+    border-top: 1px solid #2b2b2b81;
+    margin-top: 1em;
+}
+.edit__payment__box__header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.payment__box {
+    display:flex;
+    flex-direction: column;
+    padding:0.4em;
+}
+.payment__box input {
+    width:50%;
+    padding:0.4em;
+    border-radius:3px;
+    outline:none;
+    border:1px solid #2b2b2b81;
+}
+.payment__box__monthly {
+    display:flex;
+    align-items: center;
+    justify-content:space-around;
+    border-top: 1px solid #2b2b2b81;
+    padding:1em;
+    gap:2em;
+}
+.payment__box__monthly div:nth-child(1) {
+    display:flex;
+    flex-direction: column;
+    font-size:0.9em;
+    gap:0.4em;
+}
+.payment__box__monthly div:nth-child(2) {
+    display:flex;
+    flex-direction: column;
+    font-size:0.9em;
+    gap:0.4em;
+}
+.payment__box__monthly div input {
+    width:100%;
+    padding:0.4em;
+    border-radius:3px;
+    outline:none;
+    border:1px solid #2b2b2b81;
+}
+.payment__save {
+    background: var(--bg-payments);
+    color: #ffff;
+    font-size:0.9em;
+    width: 30%;
+    border:none;
+    padding:0.4em;
+    border-radius:4px;
+    align-self:flex-end;
+    cursor:pointer;
+    font-weight: 500;
+}
+/* Borrower page modal */
+.new__borrower {
+    height: 100%;
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index: 100;
+    background: var(--bg-dim);
+    display:none;
+    justify-content: center;
+    align-items: center;
+}
+.new__borrower__box {
+    background: #ffff;
+    padding:2em;
+    height: fit-content;
+    width:fit-content;
+    border-radius:4px;
+}
+.new__borrower__box form {
+    display:flex;
+    flex-direction:column;
+    
+}
+.new__borrower__title {
+    font-size: var(--title-size);
+    color: #2b2b2b;
+}
+.new__borrower__header {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.new__borrower__close {
+    width:1em;
+    cursor:pointer;
+}
+.names__box,.names__address__box {
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    gap:1em;
+    padding:1em;
+}
+.names__box div {
+    display:flex;
+    flex-direction: column;
+    font-size:0.9em;
+    gap:0.4em;
+}
+.names__box div input {
+    padding:0.5em;
+    outline:none;
+}
+.names__address__box {
+    display:flex;
+    font-size:0.9em;
+    gap:0.4em;
+    width:100%;
+}
+.names__email__box {
+    display:flex;
+    padding:1em;
+    font-size:0.9em;
+    gap:0.4em;
+    width:100%;
+}
+.names__address__box div,.names__email__box div {
+    display:flex;
+    flex-direction: column;
+    font-size:0.9em;
+    gap:0.4em;
+    width:100%;
+}
+.names__address__box div input,.names__email__box div input {
+    padding:0.5em;
+    outline:none;
+    width:100%;
+}
+.new__borrower__save {
+    padding:0.5em;
+    align-self: flex-end;
+    cursor:pointer;
+    font-weight: 500;
+    background: var(--bg-payments);
+    color: #ffff;
+    border:none;
+    border-radius:4px;
+    width:8em;
+    margin:1em;
 }

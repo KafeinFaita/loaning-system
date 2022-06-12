@@ -111,10 +111,9 @@
     // Open popup delete
     deleteBtn.forEach(btn => {
 
-        const id = btn.getAttribute("data-deleteId")
+        const id = btn.getAttribute('data-deleteId');
         btn.addEventListener('click', () => {
-            console.log(id)
-            currentIdSelection = id
+            currentIdSelection = id;
             popupDelete.style.display = 'flex';
         })
     })
