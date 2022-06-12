@@ -155,10 +155,13 @@ body {
     background: #4a4a4a;
     transition: 0.2s ease-in-out;
 }
+.sidebar__btns__active {
+    background: #4a4a4a;
+}
+
 .sidebar__btns li a {
     text-decoration: none;
     color: #ffff;
-
     width:100%;
     padding:0.5em;
 }
@@ -166,6 +169,7 @@ body {
 main {
     padding: 1em; 
     width:100%;
+    position:relative;
 }
 /* Dashboard */
 .welcome__back {
@@ -190,7 +194,6 @@ main {
 .card__view {
     width:100%;
     background: #2b2b2b2f;
-    padding:0.5em;
     position:absolute;
     bottom:0;
     left:0;
@@ -200,6 +203,15 @@ main {
     color: #ffff;
     font-size:0.8em;
     font-weight: 300; 
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+.card__view svg {
+    width: 0.5em;
+    filter:invert(1);
 }
 .card__title {
     font-weight:300;
@@ -413,4 +425,134 @@ main {
     gap:0.5em;
     font-size: 0.9em;
     padding:1em;
+}
+/* Popup Edit Loan Type */
+.edit {
+    background:rgba(0, 0, 0, 0.475);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    display:none;
+    justify-content: center;
+    align-items: center;
+}
+.edit__box {
+    background: #ffff;
+    border-radius: 5px;
+    padding:2em;
+    height: fit-content;
+    width:20em;
+}
+.edit__title {
+    font-size: var(--title-size);
+    color: #2b2b2b;
+}
+.edit__head {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.edit__close {
+    width: 0.8em;
+    cursor:pointer;
+}
+.popup__update__loans {
+    display:flex;
+    flex-direction: column;
+    gap:1em;
+}
+.popup__update__loans div {
+    display:flex;
+    flex-direction: column;
+    gap:0.5em;
+}
+.popup__update__loans label {
+    font-size: 0.9em;
+    color: #2b2b2b;
+    font-weight: 500;
+}
+.popup__update__loans input {
+    padding:0.6em;
+    outline:none;
+    border-radius:2px;
+    border:1px solid #2b2b2b81;
+}
+.popup__update__loans button {
+    background: var(--bg-payments);
+    color: #ffff;
+    font-size:0.9em;
+    width: 50%;
+    border:none;
+    padding:0.4em;
+    border-radius:4px;
+    align-self:center;
+    cursor:pointer;
+    font-weight: 500;
+}
+/* Delete Modal */
+.delete {
+    background:rgba(0, 0, 0, 0.475);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    display:none;
+    justify-content: center;
+    align-items: center;
+}
+.delete__box {
+    background: #ffff;
+    border-radius: 5px;
+    padding:2em;
+    height: fit-content;
+    width:20em;
+}
+.delete__title {
+    font-size: var(--title-size);
+    color: #2b2b2b;
+}
+.delete__head {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ask__delete__title {
+    font-size: 0.8em;
+    color: #2b2b2b;
+    text-align:center;
+}
+.ask__buttons {
+    display:flex;
+    justify-content: center;
+    gap:1em;
+    margin-top: 1em;
+}
+.ask__buttons button:nth-child(1) {
+    background: var(--bg-delete);
+    color: #ffff;
+    border:none;
+    border-radius: 3px;
+    cursor:pointer;
+}
+.ask__buttons span {
+    background:var(--bg-payments);
+    color: #ffff;
+    border:none;
+    border-radius: 3px;
+    cursor:pointer;
+    width:5em;
+    height: 2.4em;
+    text-align: center;
+    font-size:0.8em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.ask__buttons button {
+    width:5em;
+    height:2.4em;
+    font-size:0.8em;
 }
