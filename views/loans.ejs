@@ -6,6 +6,69 @@
     <div class="container">
         <%- include('./partials/sidebar.ejs') %>
         <main>
+
+            <!-- Popup Modals -->
+            <div class="new__loan">
+                <div class="new__loan__box">
+                    <div class="new__loan__box__header">
+                        <h2 class="new__loan__title">New Loan</h2>
+                        <svg class="new__loan__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                        </svg>
+                    </div>
+
+                    <form class="new__loan__form">
+                        <div class="new__loan__borrower">
+                            <div>
+                                <label for="borrower">Borrower:</label>
+                                <select name="borrower" id="borrower" required>
+                                    <option hidden>Select Borrower</option>
+                                    <option value="">Borrower 1</option>
+                                    <option value="">Borrower 2</option>
+                                    <option value="">Borrower 3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="loan_type">Loan Type:</label>
+                                <select name="loan_type" id="loan_type" required>
+                                    <option hidden>Select Loan Type</option>
+                                    <option value="">Loan Type 1</option>
+                                    <option value="">Loan Type 2</option>
+                                    <option value="">Loan Type 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="new__loan__plan">
+                            <div>
+                                <label for="loan_plan">Loan Plan:</label>
+                                <select name="loan_plan" id="loan_plan" required>
+                                    <option hidden>Select Loan plan</option>
+                                    <option value="">Loan Type 1</option>
+                                    <option value="">Loan Type 2</option>
+                                    <option value="">Loan Type 3</option>
+                                </select>
+                                <span>months[interest%, penalty%]</span>
+                            </div>
+                            <div>
+                                <label for="loan_amount">Loan Amount:</label>
+                                <input type="number" name="loan_amount" id="loan_amount" required>
+                            </div>
+                        </div>
+                        <div class="new__loan__purpose">
+                            <div>
+                                <label for="purpose">Purpose</label>
+                                <textarea name="purpose" id="purpose" cols="30" rows="5"></textarea>
+                            </div>
+                            <div>
+                                <span class="new__loan__calc">Calculate</span>
+                            </div>
+                        </div>
+                        <button class="new__loan__save">Save</button>
+                    </form>
+                </div>
+            </div>
+            <!-- End of Popup Modals -->
+
             <div class="borrower__header">
                 <h1 class="borrower__title">Loans</h1>
                 <button class="borrower__add__borrower">
@@ -77,5 +140,18 @@
             </div>
         </main>
     </div>
+    <script>
+        const newLoanModal = document.querySelector('.new__loan');
+        const closeNewLoanModalBtn = document.querySelector('.new__loan__close');
+        const openNewLoanModalBtn = document.querySelector('.borrower__add__borrower');
+
+
+        openNewLoanModalBtn.addEventListener('click', () => {
+            newLoanModal.style.display = 'flex';
+        });
+        closeNewLoanModalBtn.addEventListener('click',() => {
+            newLoanModal.style.display = 'none';
+        })
+    </script>
 </body>
 </html>

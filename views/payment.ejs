@@ -6,7 +6,27 @@
     <div class="container">
         <%- include('./partials/sidebar.ejs') %>
         <main>
+
             <!-- Popup -->
+
+            <div class="new__payment">
+                <div class="new__payment__box">
+                    <div class="new__payment__header">
+                        <h1 class="new__payment__title">New Payment</h1>
+                        <svg class="new__payment__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                        </svg>
+                    </div>
+                    <form class="new__payment__form">
+                        <div>
+                            <label for="reference">Loan Reference #:</label>
+                            <input type="number" id="reference" name="reference" required>
+                        </div>
+                        <button class="new__payment__save">Save</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="edit__payment">
                 <div class="edit__payment__box">
                     <div class="edit__payment__box__header">
@@ -119,10 +139,20 @@
         const openEditModalBtns = document.querySelectorAll('.loan__types__edit');
         const openDeleteModalBtns = document.querySelectorAll('.loan__types__delete');
         const closeDeleteModalBtn = document.querySelector('.close__delete');
-
+        const closeNewPaymentBtn = document.querySelector('.new__payment__close');
         const closeEditBtn = document.querySelector('.edit__close');
+        const openNewPaymentBtn = document.querySelector('.borrower__add__borrower');
+
         const editPaymentModal = document.querySelector('.edit__payment');
         const deletePaymentModal = document.querySelector('.delete');
+        const newPaymentModal = document.querySelector('.new__payment');
+
+        openNewPaymentBtn.addEventListener('click', () => {
+            newPaymentModal.style.display = 'flex';
+        });
+        closeNewPaymentBtn.addEventListener('click', () => {
+            newPaymentModal.style.display = 'none';
+        });
 
         // Open edit modal
         openEditModalBtns.forEach(openEditModalBtn => {
