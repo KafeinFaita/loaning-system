@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container">
+        <%- include('./partials/sidebar.ejs') %>
+        <main>
+            <div class="loan">
+                <div class="loan__form">
+                    <h1 class="loan__title">Plan's Form</h1>
+
+                    <form class="loan__form__submit">     
+                        <div class="loan__box">
+                            <label for="type">Plan (months):</label>
+                            <input type="number" name="plan" id="plan" required>
+                        </div>
+
+                        <div class="loan__box">
+                            <label for="description">Interest:</label>
+                            <input type="number" name="interest" id="interest" required>
+                        </div>
+
+                        <div class="loan__box">
+                            <label for="description">Monthly Over due's Penalty:</label>
+                            <input type="number" name="penalty" id="penalty" required>
+                        </div>
+                        
+                        <button>Save</button>
+                    </form>
+                </div>
+
+
+                <table class="loan__types">
+                    <tr>
+                        <th>#</th>
+                        <th>Plan</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="display:flex; flex-direction:column">
+                            <span>Years/Months: 3 Years</span>
+                            <span>Interest: 8%</span>
+                            <span>Over due penalty: 3%</span>
+                        </td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="display:flex; flex-direction:column">
+                            <span>Years/Months: 3 Years</span>
+                            <span>Interest: 8%</span>
+                            <span>Over due penalty: 3%</span>
+                        </td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="display:flex; flex-direction:column">
+                            <span>Years/Months: 3 Years</span>
+                            <span>Interest: 8%</span>
+                            <span>Over due penalty: 3%</span>
+                        </td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                </table>  
+            </div>
+        </main>
+    </div>
+</body>
+</html>
