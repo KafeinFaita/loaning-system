@@ -34,17 +34,18 @@
                     </tr>
                     <% if (loanTypes.length > 0) { %>
                         <% loanTypes.forEach((lt,key) => { %>
-                        <tr>
-                            <td><%- key + 1 %></td>
-                            <td style="display:flex; flex-direction:column">
-                                <span>Type Name: <%- lt.type %></span>
-                                <span>Description: <%- lt.description %></span>
-                            </td>
-                            <td>
-                                <button onclick="editLoanType(`${lt._id}`)" class="loan__types__edit">Edit</button>
-                                <button class="loan__types__delete">Delete</button>
-                            </td>
-                        </tr>
+                            <% const id = lt._id %>
+                            <tr>
+                                <td><%- key + 1 %></td>
+                                <td style="display:flex; flex-direction:column">
+                                    <span>Type Name: <%- lt.type %></span>
+                                    <span>Description: <%- lt.description %></span>
+                                </td>
+                                <td>
+                                    <button onclick="editLoanType('<%- lt._id %>')" class="loan__types__edit">Edit</button>
+                                    <button class="loan__types__delete">Delete</button>
+                                </td>
+                            </tr>
                         <% }) %> 
                     <% } %>
                 </table>  
@@ -64,6 +65,8 @@
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
+
+        console.log(loanTypes)
 
         const type = form.type.value
         const description = form.description.value
