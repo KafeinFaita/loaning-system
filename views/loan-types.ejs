@@ -96,7 +96,7 @@
 <script>
     const form = document.querySelector('.loan__form__submit');
     const edit = document.querySelector('.loan__types__edit');
-    const deleteBtn = document.querySelector('.loan__types__delete');
+    const deleteBtns = document.querySelectorAll('.loan__types__delete');
 
     // popup
     const popupUpdate = document.querySelector('.edit');
@@ -106,8 +106,10 @@
     const cancelDelete = document.querySelector('.close__delete');
 
     // Open popup delete
-    deleteBtn.addEventListener('click', () => {
-        popupDelete.style.display = 'flex';
+    deleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener('click', () => {
+            popupDelete.style.display = 'flex';
+        })
     })
 
     // close delete popup
@@ -127,8 +129,6 @@
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
-
-        console.log(loanTypes)
 
         const type = form.type.value
         const description = form.description.value
