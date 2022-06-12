@@ -10,7 +10,7 @@ router.get('/logout', logout_get)
 router.get('/signup', checkLoginStatus, signup_get)
 router.get('/users', requireAuth, users_get)
 router.get('/dashboard', requireAuth, dashboard_get)
-router.get('/loan-types', requireAuth, loan_types_get)
+router.get('/loan-types', requireAuth, loan_types_get);
 router.get('/loan-plans', requireAuth, loan_plans_get);
 router.get('/borrowers', requireAuth, borrowers_get);
 router.get('/payments', requireAuth, payment_get);

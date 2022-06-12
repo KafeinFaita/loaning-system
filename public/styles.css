@@ -454,3 +454,6 @@ main {
     justify-content: space-between;
     align-items: center;
 }
+.edit__head svg {
+    width: 0.8em;
+}
