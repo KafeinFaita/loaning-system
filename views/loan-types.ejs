@@ -82,7 +82,7 @@
                                 </td>
                                 <td>
                                     <button onclick="editLoanType('<%- lt._id %>')" class="loan__types__edit">Edit</button>
-                                    <button class="loan__types__delete">Delete</button>
+                                    <button class="loan__types__delete" data-deleteId="<%- lt._id %>">Delete</button>
                                 </td>
                             </tr>
                         <% }) %> 
@@ -103,7 +103,10 @@
     const popupDelete = document.querySelector('.delete');
     const closePopup = document.querySelector('.edit__close');
     
+    const deleteForm = document.querySelector('.popup__delete__loans')
     const cancelDelete = document.querySelector('.close__delete');
+
+    let currentIdSelection = ''
 
     // Open popup delete
     deleteBtns.forEach(deleteBtn => {
@@ -112,6 +115,21 @@
         })
     })
 
+    deleteForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        console.log(currentIdSelection)
+
+        try {
+            const response = await fetch(`/loan-types/${currentIdSelection}`, {
+                method: 'DELETE'
+            })
+            const data = await response.json()
+            if (data === 'ok') location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    })
+    
     // close delete popup
     cancelDelete.addEventListener('click',() => {
         popupDelete.style.display = 'none';
