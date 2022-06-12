@@ -96,7 +96,7 @@
 <script>
     const form = document.querySelector('.loan__form__submit');
     const edit = document.querySelector('.loan__types__edit');
-    const deleteBtns = document.querySelectorAll('.loan__types__delete');
+    const deleteBtn = document.querySelectorAll('.loan__types__delete');
 
     // popup
     const popupUpdate = document.querySelector('.edit');
@@ -109,8 +109,11 @@
     let currentIdSelection = ''
 
     // Open popup delete
-    deleteBtns.forEach(deleteBtn => {
-        deleteBtn.addEventListener('click', () => {
+    deleteBtn.forEach(btn => {
+
+        const id = btn.getAttribute('data-deleteId');
+        btn.addEventListener('click', () => {
+            currentIdSelection = id;
             popupDelete.style.display = 'flex';
         })
     })
