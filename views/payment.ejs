@@ -6,8 +6,90 @@
     <div class="container">
         <%- include('./partials/sidebar.ejs') %>
         <main>
-            <h1>Payment</h1>
+            <!-- Popup -->
+            <div class="edit__payment">
+                <div class="edit__payment__box">
+                    <div class="edit__payment__box__header">
+                        <h1 class="edit__title">Edit Payment</h1>
+                        <svg class="edit__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                        </svg>
+                    </div>
+                    <form>
+                        <div class="payment__box">
+                            <label for="reference">Loan Reference #:</label>
+                            <input type="number" name="reference" id="reference" required>
+                        </div>
+                        <div class="payment__box">
+                            <label for="payee">Payee:</label>
+                            <input type="text" name="payee" id="payee">
+                        </div>
+                        <div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- End of popup -->
+            <div class="borrower__header">
+                <h1 class="borrower__title">Payment List</h1>
+                <button class="borrower__add__borrower"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/></svg>New Payment</button>
+            </div>
+            <div class="borrower">
+                <div class="borrower__filter">
+                    <div class="borrower__entries">
+                        <h2 class="borrower__entries__show">
+                            Show
+                            <select>
+                                <option value="1">1</option>
+                            </select>
+                            entries 
+                        </h2>
+                    </div>
+                    <form class="borrower__search__form">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" placeholder="Search..." required>
+                    </form>
+                </div> 
+
+                <table class="borrower__table">
+                    <tr>
+                        <th>#</th>
+                        <th>Loan Reference No.</th>
+                        <th>Payee</th>
+                        <th>Amount</th>
+                        <th>Penalty</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1234432</td>
+                        <td>Andres, Paul D.</td>
+                        <td>3,000.00</td>
+                        <td>90.00</td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1234432</td>
+                        <td>Andres, Paul D.</td>
+                        <td>3,000.00</td>
+                        <td>90.00</td>
+                        <td>
+                            <button class="loan__types__edit">Edit</button>
+                            <button class="loan__types__delete">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </main>
     </div>
+
+    <script>
+
+    </script>
 </body>
 </html>

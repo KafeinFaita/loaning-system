@@ -7,6 +7,7 @@
     --bg-borrowers: #28A649;
     --bg-loans: #FEC417;
     --bg-receivable: #17A5AA;
+    --bg-dim: rgba(0, 0, 0, 0.475);
 
     --title-size: 1.4em;
 }
@@ -568,4 +569,47 @@ main {
     width:5em;
     height:2.4em;
     font-size:0.8em;
+}
+/* Payments page modal */
+.edit__payment {
+    background: var(--bg-dim);
+    height: 100%;
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index: 100;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit__payment__box {
+    background: #ffff;
+    border-radius: 5px;
+    padding:2em;
+    height: fit-content;
+    width: 30em;
+}
+.edit__payment__box form {
+    display:flex;
+    flex-direction:column;
+    gap:1em;
+    border-top: 1px solid #2b2b2b81;
+    margin-top: 1em;
+}
+.edit__payment__box__header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.payment__box {
+    display:flex;
+    flex-direction: column;
+}
+.payment__box input {
+    width:50%;
+    padding:0.4em;
+    border-radius:3px;
+    outline:none;
+    border:1px solid #2b2b2b81;
 }
