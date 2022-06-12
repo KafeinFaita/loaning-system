@@ -6,7 +6,7 @@
     <div class="container">
         <%- include('./partials/sidebar.ejs') %>
         <main>
-            <h1>List of Users</h1>
+            <h1 class="users__title">List of Users</h1>
             <% if (names.length > 0) { %>
                 <% names.forEach(name => { %>
                     <p><%- name %></p>

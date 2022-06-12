@@ -32,8 +32,6 @@ module.exports.loan_types_get = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-
-    
 }
 
 module.exports.loan_types_post = async (req, res) => {
@@ -45,4 +43,12 @@ module.exports.loan_types_post = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+module.exports.loan_plans_get = async (req, res) => {
+    res.render('loan-plans');
+}
+
+module.exports.borrowers_get = async (req,res) => {
+    res.render('borrowers')
 }
