@@ -52,3 +52,11 @@ module.exports.loan_plans_get = async (req, res) => {
 module.exports.borrowers_get = async (req,res) => {
     res.render('borrowers')
 }
+
+module.exports.payment_get = async(req,res) => {
+    res.render('payment');
+}
+
+module.exports.loans_get = async(req,res) => {
+    res.render('loans');
+}
