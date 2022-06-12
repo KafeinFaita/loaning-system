@@ -34,17 +34,6 @@ module.exports.loan_types_get = async (req, res) => {
     }
 }
 
-module.exports.loan_types_post = async (req, res) => {
-    const loanType = new LoanType({ type: req.body.type, description: req.body.description })
-
-    try {
-        await loanType.save()
-        res.status(201).json('ok')
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 module.exports.loan_plans_get = async (req, res) => {
     res.render('loan-plans');
 }
@@ -59,4 +48,30 @@ module.exports.payment_get = async(req,res) => {
 
 module.exports.loans_get = async(req,res) => {
     res.render('loans');
+}
+
+
+//POST
+
+module.exports.loan_types_post = async (req, res) => {
+    const loanType = new LoanType({ type: req.body.type, description: req.body.description })
+
+    try {
+        await loanType.save()
+        res.status(201).json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+//PUT PATCH
+
+module.exports.loan_types_put = async (req, res) => {
+    try {
+        console.log(req.body)
+        res.json('ok')
+    } catch (error) {
+        console.log(error)
+    }
 }
