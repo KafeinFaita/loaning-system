@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const LoanType = require('../models/LoanType')
+const { findByIdAndDelete } = require('../models/User')
 
 module.exports.index_get = (req, res) => {
     res.render('index')
@@ -70,6 +71,19 @@ module.exports.loan_types_post = async (req, res) => {
 module.exports.loan_types_put = async (req, res) => {
     try {
         console.log(req.body)
+        res.json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+//DELETE
+
+module.exports.loan_types_delete = async (req, res) => {
+    
+    try {
+        await LoanType.findByIdAndDelete(req.params.id)
         res.json('ok')
     } catch (error) {
         console.log(error)

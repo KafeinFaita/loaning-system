@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const getRoutes = require('./routes/getRoutes')
 const postRoutes = require('./routes/postRoutes')
 const putPatchRoutes = require('./routes/putPatchRoutes')
+const deleteRoutes = require('./routes/deleteRoutes')
 
 const port = process.env.PORT || 3000
 
@@ -36,6 +37,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(getRoutes)
 app.use(postRoutes)
 app.use(putPatchRoutes)
-
+app.use(deleteRoutes)
 
 

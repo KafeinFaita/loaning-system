@@ -82,7 +82,7 @@
                                 </td>
                                 <td>
                                     <button onclick="editLoanType('<%- lt._id %>')" class="loan__types__edit">Edit</button>
-                                    <button class="loan__types__delete">Delete</button>
+                                    <button class="loan__types__delete" data-deleteId="<%- lt._id %>">Delete</button>
                                 </td>
                             </tr>
                         <% }) %> 
@@ -96,20 +96,44 @@
 <script>
     const form = document.querySelector('.loan__form__submit');
     const edit = document.querySelector('.loan__types__edit');
-    const deleteBtn = document.querySelector('.loan__types__delete');
+    const deleteBtn = document.querySelectorAll('.loan__types__delete');
 
     // popup
     const popupUpdate = document.querySelector('.edit');
     const popupDelete = document.querySelector('.delete');
     const closePopup = document.querySelector('.edit__close');
     
+    const deleteForm = document.querySelector('.popup__delete__loans')
     const cancelDelete = document.querySelector('.close__delete');
 
+    let currentIdSelection = ''
+
     // Open popup delete
-    deleteBtn.addEventListener('click', () => {
-        popupDelete.style.display = 'flex';
+    deleteBtn.forEach(btn => {
+
+        const id = btn.getAttribute("data-deleteId")
+        btn.addEventListener('click', () => {
+            console.log(id)
+            currentIdSelection = id
+            popupDelete.style.display = 'flex';
+        })
     })
 
+    deleteForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        console.log(currentIdSelection)
+
+        try {
+            const response = await fetch(`/loan-types/${currentIdSelection}`, {
+                method: 'DELETE'
+            })
+            const data = await response.json()
+            if (data === 'ok') location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    })
+    
     // close delete popup
     cancelDelete.addEventListener('click',() => {
         popupDelete.style.display = 'none';
@@ -127,8 +151,6 @@
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
-
-        console.log(loanTypes)
 
         const type = form.type.value
         const description = form.description.value
