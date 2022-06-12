@@ -15,4 +15,6 @@ router.get('/loan-plans', requireAuth, loan_plans_get);
 router.get('/borrowers', requireAuth, borrowers_get);
 router.get('/payments', requireAuth, payment_get);
 router.get('/loans', requireAuth, loans_get);
+
+
 module.exports = router
