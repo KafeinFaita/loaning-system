@@ -57,6 +57,21 @@
                 </div>
             </div>
 
+            <div class="delete">
+                <div class="delete__box">
+                    <div class="delete__head">
+                        <h1 class="delete__title">Delete Borrower</h1>
+                    </div>
+                    <form class="popup__delete__loans">
+                        <h2 class="ask__delete__title">Are you sure you want to delete this?</h2>
+                        <div class="ask__buttons">
+                            <button>Yes</button>
+                            <span class="close__delete">No</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <!-- End of popups -->
             <div class="borrower__header">
                 <h1 class="borrower__title">Borrower List</h1>
@@ -129,6 +144,19 @@
         const newBorrowerModal = document.querySelector('.new__borrower');
         const openBorrowerModalBtn = document.querySelector('.borrower__add__borrower');
         const closeNewBorrowerBtn = document.querySelector('.new__borrower__close');
+
+        const deleteBorrowerModal = document.querySelector('.delete');
+        const openDeleteBorrowerModalBtns = document.querySelectorAll('.loan__types__delete');
+        const closeDeleteBorrowerBtn = document.querySelector('.close__delete');
+
+        openDeleteBorrowerModalBtns.forEach(openDeleteBorrowerModalBtn => {
+            openDeleteBorrowerModalBtn.addEventListener('click', () => {
+                deleteBorrowerModal.style.display = 'flex';
+            });
+        });
+        closeDeleteBorrowerBtn.addEventListener('click', () => {
+            deleteBorrowerModal.style.display = 'none';
+        });
 
         openBorrowerModalBtn.addEventListener('click', () => {
             newBorrowerModal.style.display = 'flex';
