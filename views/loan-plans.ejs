@@ -6,9 +6,25 @@
     <div class="container">
         <%- include('./partials/sidebar.ejs') %>
         <main>
+            <!-- Popup -->
+            <div class="delete">
+                <div class="delete__box">
+                    <div class="delete__head">
+                        <h1 class="delete__title">Delete Loan</h1>
+                    </div>
+                    <form class="popup__delete__loans">
+                        <h2 class="ask__delete__title">Are you sure you want to delete this?</h2>
+                        <div class="ask__buttons">
+                            <button>Yes</button>
+                            <span class="close__delete">No</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end of popup -->
             <div class="loan">
                 <div class="loan__form">
-                    <h1 class="loan__title">Plan's Form</h1>
+                    <h1 class="loan__title">Loan Plan's Form</h1>
 
                     <form class="loan__form__submit">     
                         <div class="loan__box">
@@ -77,5 +93,24 @@
             </div>
         </main>
     </div>
+
+    <script>
+
+        const openDeleteModalBtns = document.querySelectorAll('.loan__types__delete');
+        const deleteModal = document.querySelector('.delete');
+        const closeDeleteModalBtn = document.querySelector('.close__delete');
+        
+        openDeleteModalBtns.forEach(openDeleteModalBtn => {
+            openDeleteModalBtn.addEventListener('click', () => {
+                deleteModal.style.display = 'flex';
+            });
+        });
+
+        closeDeleteModalBtn.addEventListener('click', () => {
+            deleteModal.style.display = 'none';
+        });
+
+    </script>
+
 </body>
 </html>
