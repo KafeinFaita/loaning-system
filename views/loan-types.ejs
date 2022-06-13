@@ -19,11 +19,11 @@
                     <form class="popup__update__loans">
                         <div>
                             <label for="type">Type Name:</label>
-                            <input type="text" name="type" value="">
+                            <input type="text" name="type" value="" id="update-type-text">
                         </div>
                         <div>
                             <label for="type">Description:</label>
-                            <input type="text" name="description" value="">
+                            <input type="text" name="description" value="" id="update-description-text">
                         </div>
                         <button>Update</button>
                     </form>
@@ -81,7 +81,7 @@
                                     <span>Description: <%- lt.description %></span>
                                 </td>
                                 <td>
-                                    <button onclick="editLoanType('<%- lt._id %>')" class="loan__types__edit">Edit</button>
+                                    <button class="loan__types__edit" data-editId="<%- lt._id %>" data-type="<%- lt.type %>" data-desc="<%- lt.description %>">Edit</button>
                                     <button class="loan__types__delete" data-deleteId="<%- lt._id %>">Delete</button>
                                 </td>
                             </tr>
@@ -95,7 +95,7 @@
 
 <script>
     const form = document.querySelector('.loan__form__submit');
-    const edit = document.querySelector('.loan__types__edit');
+    const editBtn = document.querySelectorAll('.loan__types__edit');
     const deleteBtn = document.querySelectorAll('.loan__types__delete');
 
     // popup
@@ -106,7 +106,13 @@
     const deleteForm = document.querySelector('.popup__delete__loans')
     const cancelDelete = document.querySelector('.close__delete');
 
-    let currentIdSelection = ''
+    const editForm = document.querySelector('.popup__update__loans')
+
+    // textbox for edit popup
+    const typeBox = document.getElementById('update-type-text')
+    const descriptionBox = document.getElementById('update-description-text')
+
+    let currentIdSelection = '' 
 
     // Open popup delete
     deleteBtn.forEach(btn => {
@@ -139,14 +145,38 @@
     })
 
     // Edit the data on click
-    const editLoanType = async (id) => {
-        popupUpdate.style.display = 'flex'
-    }
+    editBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentIdSelection = btn.getAttribute('data-editId')
+            typeBox.value = btn.getAttribute('data-type')
+            descriptionBox.value = btn.getAttribute('data-desc')
+            popupUpdate.style.display = 'flex';
+        })
+    })
+
+    editForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        
+        const type = editForm.type.value
+        const description = editForm.description.value
+
+        try {
+            const response = await fetch(`/loan-types/${currentIdSelection}`, {
+                method: 'PUT',
+                body: JSON.stringify({ type, description }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const data = await response.json()
+            if (data === 'ok') location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+
+    })
     
     closePopup.addEventListener('click',() => {
         popupUpdate.style.display = 'none'
     })
-
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault()

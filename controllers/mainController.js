@@ -70,7 +70,10 @@ module.exports.loan_types_post = async (req, res) => {
 
 module.exports.loan_types_put = async (req, res) => {
     try {
-        console.log(req.body)
+        await LoanType.findByIdAndUpdate(req.params.id, {
+            type: req.body.type,
+            description: req.body.description
+        })
         res.json('ok')
     } catch (error) {
         console.log(error)
