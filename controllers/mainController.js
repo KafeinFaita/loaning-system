@@ -108,3 +108,13 @@ module.exports.loan_types_delete = async (req, res) => {
         console.log(error)
     }
 }
+
+module.exports.loan_plans_delete = async (req, res) => {
+    
+    try {
+        await LoanPlan.findByIdAndDelete(req.params.id)
+        res.json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}

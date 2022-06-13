@@ -126,7 +126,6 @@
 
     deleteForm.addEventListener('submit', async (e) => {
         e.preventDefault()
-        console.log(currentIdSelection)
 
         try {
             const response = await fetch(`/loan-types/${currentIdSelection}`, {
