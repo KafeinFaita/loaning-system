@@ -53,42 +53,23 @@
                         <th>Plan</th>
                         <th>Action</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td style="display:flex; flex-direction:column">
-                            <span>Years/Months: 3 Years</span>
-                            <span>Interest: 8%</span>
-                            <span>Over due penalty: 3%</span>
-                        </td>
-                        <td>
-                            <button class="loan__types__edit">Edit</button>
-                            <button class="loan__types__delete">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td style="display:flex; flex-direction:column">
-                            <span>Years/Months: 3 Years</span>
-                            <span>Interest: 8%</span>
-                            <span>Over due penalty: 3%</span>
-                        </td>
-                        <td>
-                            <button class="loan__types__edit">Edit</button>
-                            <button class="loan__types__delete">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td style="display:flex; flex-direction:column">
-                            <span>Years/Months: 3 Years</span>
-                            <span>Interest: 8%</span>
-                            <span>Over due penalty: 3%</span>
-                        </td>
-                        <td>
-                            <button class="loan__types__edit">Edit</button>
-                            <button class="loan__types__delete">Delete</button>
-                        </td>
-                    </tr>
+
+                    <% if (loanPlans.length > 0) { %>
+                        <% loanPlans.forEach((lp, key) => { %>
+                            <tr>
+                                <td><%- key + 1 %></td>
+                                <td style="display:flex; flex-direction:column">
+                                    <span>Years/Months: <%- lp.yearsMonths %>%</span>
+                                    <span>Interest: <%- lp.interest %>%</span>
+                                    <span>Over due penalty: <%- lp.overduePenalty %>%</span>
+                                </td>
+                                <td>
+                                    <button class="loan__types__edit">Edit</button>
+                                    <button class="loan__types__delete">Delete</button>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
                 </table>  
             </div>
         </main>
@@ -99,6 +80,8 @@
         const openDeleteModalBtns = document.querySelectorAll('.loan__types__delete');
         const deleteModal = document.querySelector('.delete');
         const closeDeleteModalBtn = document.querySelector('.close__delete');
+
+        //DELETE
         
         openDeleteModalBtns.forEach(openDeleteModalBtn => {
             openDeleteModalBtn.addEventListener('click', () => {
@@ -109,6 +92,30 @@
         closeDeleteModalBtn.addEventListener('click', () => {
             deleteModal.style.display = 'none';
         });
+
+        // LOAN PLAN FORM
+
+        const form = document.querySelector('.loan__form__submit')
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            const plan = form.plan.value
+            const interest = form.interest.value
+            const penalty = form.penalty.value
+            
+            try {
+                const response = await fetch('/loan-plans', {
+                    method: 'POST',
+                    body: JSON.stringify({ plan, interest, penalty }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const data = await response.json()
+                if (data === 'ok') location.reload()
+            } catch (error) {
+                console.log(error)
+            }
+        })
 
     </script>
 

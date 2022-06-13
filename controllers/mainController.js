@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const LoanType = require('../models/LoanType')
-const { findByIdAndDelete } = require('../models/User')
+const LoanPlan = require('../models/LoanPlan')
 
 module.exports.index_get = (req, res) => {
     res.render('index')
@@ -36,7 +36,12 @@ module.exports.loan_types_get = async (req, res) => {
 }
 
 module.exports.loan_plans_get = async (req, res) => {
-    res.render('loan-plans');
+    try {
+        const loanPlans = await LoanPlan.find()
+        res.render('loan-plans', { loanPlans })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports.borrowers_get = async (req,res) => {
@@ -59,6 +64,17 @@ module.exports.loan_types_post = async (req, res) => {
 
     try {
         await loanType.save()
+        res.status(201).json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.loan_plans_post = async (req, res) => {
+    const loanPlan = new LoanPlan({ yearsMonths: req.body.plan, interest: req.body.interest, overduePenalty: req.body.penalty })
+
+    try {
+        await loanPlan.save()
         res.status(201).json('ok')
     } catch (error) {
         console.log(error)
