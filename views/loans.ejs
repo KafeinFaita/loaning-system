@@ -82,6 +82,30 @@
                     </form>
                 </div>
             </div>
+
+            <div class="edit">
+                <div class="edit__box">
+                    <div class="edit__head">
+                        <h1 class="edit__title">Update Loan</h1>
+                        <svg class="edit__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                        </svg>
+                    </div>
+
+                    <form class="popup__update__loans">
+                        <!-- <div>
+                            <label for="type">Type Name:</label>
+                            <input type="text" name="type" value="" id="update-type-text">
+                        </div>
+                        <div>
+                            <label for="type">Description:</label>
+                            <input type="text" name="description" value="" id="update-description-text">
+                        </div> -->
+                        <h1>WHAT TO INPUTS TO SHOW?</h1>
+                        <button>Update</button>
+                    </form>
+                </div>
+            </div>
             <!-- End of Popup Modals -->
 
             <div class="borrower__header">
@@ -163,6 +187,19 @@
         const deleteLoanModal = document.querySelector('.delete');
         const openDeleteLoanModalBtns = document.querySelectorAll('.loan__types__delete');
         const closeDeleteLoanModalBtn = document.querySelector('.close__delete');
+
+        const editModal = document.querySelector('.edit');
+        const openEditModalBtns = document.querySelectorAll('.loan__types__edit');
+        const closeEditModalBtn = document.querySelector('.edit__close');
+
+        openEditModalBtns.forEach(editBtn => {
+            editBtn.addEventListener('click', () => {
+                editModal.style.display = 'flex';
+            })
+        })
+        closeEditModalBtn.addEventListener('click',() => {
+            editModal.style.display = 'none';
+        })
 
         openDeleteLoanModalBtns.forEach(openDeleteLoanModalBtn => {
             openDeleteLoanModalBtn.addEventListener('click', () => {
