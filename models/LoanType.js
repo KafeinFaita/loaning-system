@@ -9,6 +9,13 @@ const loanTypeSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    maxAmount: {
+        type: Number
+       
+    },
+    interestRate: {
+        type: Number
     }
 })
 
