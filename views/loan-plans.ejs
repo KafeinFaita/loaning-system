@@ -20,15 +20,15 @@
                     <form class="popup__update__loans">
                         <div>
                             <label for="plan">Plan (months):</label>
-                            <input type="number" name="plan" value="" id="plan">
+                            <input type="number" name="plan" value="" id="edit-plan">
                         </div>
                         <div>
                             <label for="interest">Interest:</label>
-                            <input type="number" name="interest" value="" id="interest">
+                            <input type="number" name="interest" value="" id="edit-interest">
                         </div>
                         <div>
                             <label for="due_penalty">Monthly Over due's Penalty:</label>
-                            <input type="text" name="due_penalty" value="" id="due_penalty">
+                            <input type="text" name="due_penalty" value="" id="edit-penalty">
                         </div>
                         <button>Update</button>
                     </form>
@@ -92,7 +92,7 @@
                                     <span>Over due penalty: <%- lp.overduePenalty %>%</span>
                                 </td>
                                 <td>
-                                    <button class="loan__types__edit">Edit</button>
+                                    <button class="loan__types__edit" data-id="<%- lp.id %>" data-years="<%- lp.yearsMonths %>" data-interest="<%- lp.interest %>" data-penalty="<%- lp.overduePenalty %>">Edit</button>
                                     <button class="loan__types__delete" data-id="<%- lp.id %>">Delete</button>
                                 </td>
                             </tr>
@@ -113,20 +113,6 @@
         const deleteModal = document.querySelector('.delete');
         const closeDeleteModalBtn = document.querySelector('.close__delete');
         const deleteForm = document.querySelector('.popup__delete__loans');
-
-        // EDIT
-        const closeEditModalBtn = document.querySelector('.edit__close');
-        const editModal = document.querySelector('.edit');
-        const openEditModalBtns = document.querySelectorAll('.loan__types__edit');
-        
-        openEditModalBtns.forEach(openEditModalBtn => {
-            openEditModalBtn.addEventListener('click', () => {
-                editModal.style.display = 'flex';
-            })
-        })
-        closeEditModalBtn.addEventListener('click',() => {
-            editModal.style.display = 'none';
-        });
 
         openDeleteModalBtns.forEach(btn => {
             const id = btn.getAttribute('data-id')
@@ -152,6 +138,52 @@
             } catch (error) {
                 console.log(error)
             }
+        })
+
+        // EDIT
+        const closeEditModalBtn = document.querySelector('.edit__close');
+        const editModal = document.querySelector('.edit');
+        const openEditModalBtns = document.querySelectorAll('.loan__types__edit');
+        const editForm = document.querySelector('.popup__update__loans')
+
+        const planBox = document.getElementById('edit-plan')
+        const interestBox = document.getElementById('edit-interest')
+        const penaltyBox = document.getElementById('edit-penalty')
+        
+        openEditModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentIdSelection = btn.getAttribute('data-id')
+                planBox.value = btn.getAttribute('data-years')
+                interestBox.value = btn.getAttribute('data-interest')
+                penaltyBox.value = btn.getAttribute('data-penalty')
+                editModal.style.display = 'flex';
+            })
+        })
+        closeEditModalBtn.addEventListener('click',() => {
+            editModal.style.display = 'none';
+        });
+
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            console.log(currentIdSelection)
+
+            const plan = editForm.plan.value
+            const interest = editForm.interest.value
+            const duePenalty = editForm.due_penalty.value
+
+            try {
+                const response = await fetch(`/loan-plans/${currentIdSelection}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ plan, interest, penalty: duePenalty }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const data = await response.json()
+                if (data === 'ok') location.reload() 
+            } catch (error) {
+                console.log(error)
+            }
+
         })
 
         // LOAN PLAN FORM

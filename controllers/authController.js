@@ -12,9 +12,9 @@ const createToken = id => {
 
 module.exports.signup_post = async (req, res) => {
 
-    const userExists = await User.findOne({ username: req.body.username })
-    if (userExists) return res.status(409).json('Username is already taken.')
-
+    const user = await User.findOne({ username: req.body.username })
+    if (user) return res.status(409).json('Username is already taken.')
+    if (req.body.username.length <= 6 || req.body.password.length <= 6) return res.status(409).json('Username and/or password must be 7 characters or longer.')
 
     const hashedPass = await bcrypt.hash(req.body.password, 10)
     const newUser = new User({ username: req.body.username, password: hashedPass })
