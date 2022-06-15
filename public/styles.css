@@ -772,6 +772,56 @@ main {
     width:8em;
     margin:1em;
 }
+/* Edit borrower */ 
+.edit__borrower {
+    height: 100%;
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index: 100;
+    background: var(--bg-dim);
+    display:none;
+    justify-content: center;
+    align-items: center;
+}
+.edit__borrower__box {
+    background: #ffff;
+    padding:2em;
+    height: fit-content;
+    width:fit-content;
+    border-radius:4px;
+}
+.edit__borrower__box form {
+    display:flex;
+    flex-direction:column;
+    
+}
+.edit__borrower__title {
+    font-size: var(--title-size);
+    color: #2b2b2b;
+}
+.edit__borrower__header {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.edit__borrower__close {
+    width:1em;
+    cursor:pointer;
+}
+.edit__borrower__save {
+    padding:0.5em;
+    align-self: flex-end;
+    cursor:pointer;
+    font-weight: 500;
+    background: var(--bg-payments);
+    color: #ffff;
+    border:none;
+    border-radius:4px;
+    width:8em;
+    margin:1em;
+}
 /* Loan page modal */
 .new__loan {
     display:none;
@@ -814,6 +864,7 @@ main {
     display:flex;
     flex-direction: column;
     gap:0.2em;
+    margin-top: 1em;
 }
 .new__loan__borrower div {
     display:flex;
@@ -1022,7 +1073,11 @@ main {
 }
 
 @media screen and (max-width: 776px) {
+    body {
+        font-size: 12px;
+    }
     .sidebar {
+        display:none;
         position:fixed;
         right:0;
         top:0;
@@ -1042,6 +1097,9 @@ main {
     }
     .navbar__user {
         display:none;
+    }
+    .navbar__title {
+        font-size:0.9em;
     }
     .navbar__burger {
         background:none;

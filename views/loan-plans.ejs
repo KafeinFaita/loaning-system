@@ -57,17 +57,17 @@
                     <form class="loan__form__submit">     
                         <div class="loan__box">
                             <label for="type">Plan (months):</label>
-                            <input type="number" name="plan" id="plan" required>
+                            <input type="number" name="plan" id="plan" min="1" max="12" placeholder="1-12" required>
                         </div>
 
                         <div class="loan__box">
                             <label for="description">Interest:</label>
-                            <input type="number" name="interest" id="interest" required>
+                            <input type="number" name="interest" id="interest" min="1" max="100" placeholder="%" required>
                         </div>
 
                         <div class="loan__box">
                             <label for="description">Monthly Over due's Penalty:</label>
-                            <input type="number" name="penalty" id="penalty" required>
+                            <input type="number" name="penalty" id="penalty" min="1" max="100" placeholder="%" required>
                         </div>
                         
                         <button>Save</button>
