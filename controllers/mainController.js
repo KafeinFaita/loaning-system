@@ -60,7 +60,7 @@ module.exports.loans_get = async(req,res) => {
 //POST
 
 module.exports.loan_types_post = async (req, res) => {
-    const loanType = new LoanType({ type: req.body.type, description: req.body.description })
+    const loanType = new LoanType({ type: req.body.type, description: req.body.description, maxAmount: req.body.maxAmount, interestRate: req.body.interestRate })
 
     try {
         await loanType.save()
@@ -86,9 +86,29 @@ module.exports.loan_plans_post = async (req, res) => {
 
 module.exports.loan_types_put = async (req, res) => {
     try {
-        await LoanType.findByIdAndUpdate(req.params.id, {
-            type: req.body.type,
-            description: req.body.description
+        // await LoanType.findByIdAndUpdate(req.params.id, {
+        //     type: req.body.type,
+        //     description: req.body.description
+        // })
+
+        const loanType = await LoanType.findById(req.params.id)
+        loanType.type = req.body.type
+        loanType.description = req.body.description
+        loanType.maxAmount = req.body.maxAmount
+        loanType.interestRate = req.body.interestRate
+        await loanType.save()
+        res.json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.loan_plans_put = async (req, res) => {
+    try {
+        await LoanPlan.findByIdAndUpdate(req.params.id, {
+            yearsMonths: req.body.plan,
+            interest: req.body.interest,
+            overduePenalty: req.body.penalty
         })
         res.json('ok')
     } catch (error) {
