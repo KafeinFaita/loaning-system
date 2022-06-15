@@ -9,6 +9,8 @@ const postRoutes = require('./routes/postRoutes')
 const putPatchRoutes = require('./routes/putPatchRoutes')
 const deleteRoutes = require('./routes/deleteRoutes')
 
+const { displayUsername } = require('./controllers/middleware')
+
 const port = process.env.PORT || 3000
 
 const dbURI = "mongodb+srv://kafein:kafeinfaita@cluster0.3xefo.mongodb.net/loaning-system?retryWrites=true&w=majority"
@@ -34,9 +36,11 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 
+app.get('*', displayUsername)
 app.use(getRoutes)
 app.use(postRoutes)
 app.use(putPatchRoutes)
 app.use(deleteRoutes)
+
 
 
