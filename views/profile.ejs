@@ -1,39 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<%- include('./partials/head.ejs') %>
 <body>
-    <h1><%- user.username %>'s Profile</h1>
-    <p>Full name: <%- user.fullname %></p>
-    <p>Address: <%- user.address %></p>
-    <p>Email: <%- user.email %></p>
-    <p>Contact Number: <%- user.contact %>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container">
+        <%- include('./partials/sidebar.ejs') %>
+         <main>
+            <!-- POpup -->
+            <div class="edit">
+                <div class="edit__profile">
+                    <form class="edit__profile__form">
+                        <div class="edit__profile__header">
+                            <h1 class="edit__profile__title">Edit Profile</h1>
+                            <svg class="edit__profile__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                            </svg>
+                        </div>
+                        <label for="fullname">Full name:</label>
+                        <input type="text" name="fullname">
 
-    <h1>Edit Profile</h1>
-    <form>
-        <label for="fullname">Full name:</label>
-        <input type="text" name="fullname">
+                        <label for="address">Address:</label>
+                        <input type="text" name="address">
 
-        <label for="address">Address:</label>
-        <input type="text" name="address">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
 
-        <label for="email">Email:</label>
-        <input type="text" name="email">
+                        <label for="contact">Contact Number:</label>
+                        <input type="number" name="contact">
 
-        <label for="contact">Contact Number:</label>
-        <input type="number" name="contact">
-
-        <button>Submit</button>
-    </form>
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+            <!-- End of popup -->
+            <div class="profile__header">
+                <h1 class="profile__title"><%- user.username.toUpperCase() %>'s Profile</h1>
+                <button class="borrower__add__borrower">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
+                    </svg>Edit <%- user.username %>'s Profile</button>
+            </div>
+            <div class="profile__info">
+                <div class="profile__photo__container">
+                    <img style="width: 300px; height: 300px; object-fit:cover;" src="/images/default-photo.png" alt="default">
+                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*" required>
+                </div>
+                <div>
+                    <p>Full name: <%- user.fullname %></p>
+                    <p>Address: <%- user.address %></p>
+                    <p>Email: <%- user.email %></p>
+                    <p>Contact Number: <%- user.contact %></p>
+                </div>
+            </div>
+            
+         </main>
+    </div>
+    
 
 </body>
 
 <script>
     const form = document.querySelector('form')
+    const editModal = document.querySelector('.edit');
+    const openEditModal = document.querySelector('.borrower__add__borrower');
+    const closeEditModal = document.querySelector('.edit__profile__close');
+
+    openEditModal.addEventListener('click', () => {
+        editModal.style.display = 'flex';
+    });
+    closeEditModal.addEventListener('click',() => {
+        editModal.style.display = 'none';
+    });
+
 
     form.addEventListener('submit', async e => {
         e.preventDefault()
