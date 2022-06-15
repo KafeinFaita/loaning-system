@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%- user.username %>'s Profile</h1>
+    <p>Full name: <%- user.fullname %></p>
+    <p>Address: <%- user.address %></p>
+    <p>Email: <%- user.email %></p>
+    <p>Contact Number: <%- user.contact %>
+
+    <h1>Edit Profile</h1>
+    <form>
+        <label for="fullname">Full name:</label>
+        <input type="text" name="fullname">
+
+        <label for="address">Address:</label>
+        <input type="text" name="address">
+
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+
+        <label for="contact">Contact Number:</label>
+        <input type="number" name="contact">
+
+        <button>Submit</button>
+    </form>
+
+</body>
+
+<script>
+    const form = document.querySelector('form')
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault()
+
+        const fullname = form.fullname.value
+        const address = form.address.value
+        const email = form.email.value
+        const contact = form.contact.value
+
+        try {
+            const response = await fetch('/profile', {
+                method: 'PATCH',
+                body: JSON.stringify({ fullname, address, email, contact }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const data = await response.json()
+            if (data === 'ok') location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    })
+</script>
+</html>

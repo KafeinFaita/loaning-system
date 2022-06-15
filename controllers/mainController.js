@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const LoanType = require('../models/LoanType')
 const LoanPlan = require('../models/LoanPlan')
+const decode = require('jwt-decode')
 
 module.exports.index_get = (req, res) => {
     res.render('index')
@@ -16,6 +17,18 @@ module.exports.users_get = async (req, res) => {
         const names = users.map(user => user.username)
        
         res.render('users', { names, test: "asd" })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.profile_get = async (req, res) => {
+
+    const decodedToken = decode(req.cookies.jwt)
+
+    try {
+        const { password, __v0, ...data } = await User.findById(decodedToken.id).lean()
+        res.render('profile', { user: data })
     } catch (error) {
         console.log(error)
     }
@@ -83,6 +96,23 @@ module.exports.loan_plans_post = async (req, res) => {
 
 
 //PUT PATCH
+
+module.exports.profile_patch = async (req, res) => {
+
+    const decodedToken = decode(req.cookies.jwt)
+
+    try {
+        await User.findByIdAndUpdate(decodedToken.id, {
+            fullname: req.body.fullname,
+            address: req.body.address,
+            email: req.body.email,
+            contact: req.body.contact
+        })
+        res.json('ok')
+    } catch (error) {
+        res.json(error)
+    }
+}
 
 module.exports.loan_types_put = async (req, res) => {
     try {
