@@ -42,9 +42,18 @@
             </div>
             <div class="profile__info">
                 <div class="profile__photo__container">
-                    <img style="width: 300px; height: 300px; object-fit:cover;" src="/images/default-photo.png" alt="default">
-                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*" required>
+                    <form class="photo_form" enctype="multipart/form-data">
+                        <img style="width: 300px; height: 300px; object-fit:cover;" src="<%- user.photoPath %>" alt="default">
+                        <input type="file" name="profile_photo" id="profile_photo" accept="image/*" required>
+                        <button>Submit</button>
+                    </form>
+                    
                 </div>
+                <!-- <form class="photo_form" enctype="multipart/form-data">
+                    <img style="width: 300px; height: 300px; object-fit:cover;" src="<%- user.photoPath %>" alt="default">
+                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*" required>
+                    <button>Submit</button>
+                </form> -->
                 <div>
                     <p>Full name: <%- user.fullname %></p>
                     <p>Address: <%- user.address %></p>
@@ -60,10 +69,12 @@
 </body>
 
 <script>
-    const form = document.querySelector('form')
+    const form = document.querySelector('.edit__profile__form')
     const editModal = document.querySelector('.edit');
     const openEditModal = document.querySelector('.borrower__add__borrower');
     const closeEditModal = document.querySelector('.edit__profile__close');
+
+    const photoForm = document.querySelector('.photo_form')
 
     openEditModal.addEventListener('click', () => {
         editModal.style.display = 'flex';
@@ -86,6 +97,22 @@
                 method: 'PATCH',
                 body: JSON.stringify({ fullname, address, email, contact }),
                 headers: { 'Content-Type': 'application/json' }
+            })
+            const data = await response.json()
+            if (data === 'ok') location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    photoForm.addEventListener('submit', async e => {
+        e.preventDefault()
+
+        try {
+            const response = await fetch('/profile/photo', {
+                method: 'PATCH',
+                body: new FormData(photoForm)
+                // headers: { 'Content-Type': 'application/json' }
             })
             const data = await response.json()
             if (data === 'ok') location.reload()

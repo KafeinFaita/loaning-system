@@ -10,6 +10,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    photoPath: {
+        type: String,
+        default: "/images/default-photo.png"
+    },
     fullname: {
         type: String,
         default: ""

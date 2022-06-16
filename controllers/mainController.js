@@ -2,6 +2,7 @@ const User = require('../models/User')
 const LoanType = require('../models/LoanType')
 const LoanPlan = require('../models/LoanPlan')
 const decode = require('jwt-decode')
+const fs = require('fs')
 
 module.exports.index_get = (req, res) => {
     res.render('index')
@@ -112,6 +113,31 @@ module.exports.profile_patch = async (req, res) => {
     } catch (error) {
         res.json(error)
     }
+}
+
+module.exports.profile_photo_patch = async (req, res) => {
+    console.log(req.file.path.substring(6))
+
+    const decodedToken = decode(req.cookies.jwt)
+    try {
+        
+        const user = await User.findById(decodedToken.id)
+        console.log(user.fullname)
+
+        if (fs.existsSync(`public${user.photoPath}`) && user.photoPath !== '/images/default-photo.png') {
+
+                fs.unlink(`public${user.photoPath}`, err => {
+                if (err) console.log(err)
+            })
+        }
+       
+        user.photoPath = req.file.path.substring(6)
+        await user.save()
+        res.json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 module.exports.loan_types_put = async (req, res) => {

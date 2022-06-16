@@ -3,6 +3,7 @@ const router = express.Router()
 
 const { signup_post, login_post } = require('../controllers/authController')
 const { loan_types_post, loan_plans_post } = require('../controllers/mainController')
+const { upload } = require('../controllers/middleware')
 
 router.post('/signup', signup_post)
 router.post('/', login_post)
