@@ -20,38 +20,44 @@
                     <form class="new__loan__form">
                         <div class="new__loan__borrower">
                             <div>
-                                <label for="borrower">Borrower:</label>
-                                <select name="borrower" id="borrower" required>
-                                    <option hidden>Select Borrower</option>
-                                    <option value="">Borrower 1</option>
-                                    <option value="">Borrower 2</option>
-                                    <option value="">Borrower 3</option>
-                                </select>
+                                <label for="date_of_loan_application">Date of Loan Application:</label>
+                                <span>June 17, 2022</span>
                             </div>
                             <div>
-                                <label for="loan_type">Loan Type:</label>
-                                <select name="loan_type" id="loan_type" required>
-                                    <option hidden>Select Loan Type</option>
-                                    <option value="">Loan Type 1</option>
-                                    <option value="">Loan Type 2</option>
-                                    <option value="">Loan Type 3</option>
-                                </select>
+                                <label for="member_name">Member's Name:</label>
+                                <span>Andres, Lynyrd De Ocampo</span>
+                            </div>
+                            <div>
+                                <label for="date_of_membership">Date of Membership:</label>
+                                <span>June 17, 2022</span>
                             </div>
                         </div>
                         <div class="new__loan__plan">
                             <div>
-                                <label for="loan_plan">Loan Plan:</label>
-                                <select name="loan_plan" id="loan_plan" required>
-                                    <option hidden>Select Loan plan</option>
-                                    <option value="">Loan Type 1</option>
-                                    <option value="">Loan Type 2</option>
-                                    <option value="">Loan Type 3</option>
-                                </select>
-                                <span>months[interest%, penalty%]</span>
+                                <label for="number_of_years_as_member">Number of Years as Member:</label>
+                                <span>7</span>
                             </div>
                             <div>
-                                <label for="loan_amount">Loan Amount:</label>
-                                <input type="number" name="loan_amount" id="loan_amount" required>
+                                <label for="loan_amount">Maximum Loanable Amount:</label>
+                                <span>100,000.00</span>
+                            </div>
+                            <div>
+                                <label for="interest_rate_per_annum">Interest Rate Per Annum</label>
+                                <span>3</span>
+                            </div>
+                        </div>
+                        <div class="new__loan__term">
+                            <div>
+                                <label for="number_of_comakers">Required Number of Co-Makers</label>
+                                <span>4</span>
+                            </div>
+                            <div>
+                                <label for="max_term">Max Payment Terms (in years):</label>
+                                <span>2</span>
+                            </div>
+                            <div>
+                                <label for="processing_fee">Processing Fee (Php):</label>
+                                <span>550.00</span>
                             </div>
                         </div>
                         <div class="new__loan__purpose">
@@ -60,7 +66,15 @@
                                 <textarea name="purpose" id="purpose" cols="30" rows="5"></textarea>
                             </div>
                             <div>
-                                <span class="new__loan__calc">Calculate</span>
+                                <label for="loan_amount">Loan Amount</label>
+                                <input type="number" name="loan_amount" id="loan_amount">
+                            </div>
+                            <div>
+                                <label for="loan_to_apply">Loan to Apply</label>
+                                <select name="loan_to_apply" id="loan_to_apply">
+                                    <option hidden>Select Loan</option>
+                                    <option value="Calamity Loan">Calamity Loan</option>
+                                </select>
                             </div>
                         </div>
                         <button class="new__loan__save">Save</button>
