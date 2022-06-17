@@ -843,9 +843,8 @@ main {
 .new__loan__box {
     background: #ffff;
     border-radius:4px;
-    width: 400px;
-    height: 400px;
-    overflow-y: scroll;
+    width: fit-content;
+    height: fit-content;
     padding:2em;
 }
 .new__loan__box__header {
@@ -863,9 +862,8 @@ main {
 }
 .new__loan__borrower {
     display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap:1em;
+    justify-content: space-between;
+    font-size: 0.9em !important;
 }
 .new__loan__form {
     display:flex;
@@ -875,6 +873,7 @@ main {
 }
 .new__loan__borrower div {
     display:flex;
+    width: 14em;
     flex-direction: column;
 }
 .new__loan__borrower div label {
@@ -890,14 +889,14 @@ main {
 }
 .new__loan__plan {
     display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap:1em;
+    justify-content: space-between;
     margin-top: 1em;
+    font-size: 0.9em !important;
 }
 .new__loan__plan div {
     display:flex;
     flex-direction: column;
+    width: 14em;
 }
 .new__loan__plan div label {
     font-size: 0.9em;
@@ -915,14 +914,14 @@ main {
 }
 .new__loan__purpose {
     display:flex;
-    justify-content:flex-start;
-    flex-direction: column;
-    gap:1em;
+    gap:2em;
     margin-top: 1em;
+    font-size: 0.9em !important;
 }
 .new__loan__purpose div {
     display:flex;
     flex-direction: column;
+    width: 14em;
 }
 .new__loan__purpose label {
     font-size: 0.9em;
@@ -933,24 +932,26 @@ main {
     border: 1px solid #2b2b2b81;
     outline:none;
     border-radius:3px;
-    width:15em;
+    width:100%;
 }
 .new__loan__purpose select, .new__loan__purpose input {
     padding: 0.5em;
     border: 1px solid #2b2b2b81;
     outline:none;
     border-radius:3px;
+    width:100%;
 }
 .new__loan__term {
     display:flex;
-    flex-direction: column;
-    gap:1em;
-    justify-content: flex-start;
+    justify-content: space-between;
+    gap:2em;
     margin-top:1em;
+    font-size: 0.9em !important;
 }
 .new__loan__term div {
     display:flex;
     flex-direction: column;
+    width: 14em;
 }
 .new__loan__term div label {
     font-size: 0.9em;
@@ -960,12 +961,13 @@ main {
     background: var(--bg-payments);
     color: #ffff;
     font-size:0.9em;
-    width: 30%;
+    width: 20%;
     border:none;
     padding:0.4em;
     border-radius:4px;
     align-self:flex-end;
     cursor:pointer;
+    margin-top:2em;
     font-weight: 500;
 }
 /* New payment modal */
