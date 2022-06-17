@@ -829,7 +829,7 @@ main {
 }
 /* Loan page modal */
 .new__loan {
-    display:none;
+    display:flex;
     justify-content: center;
     align-items: center;
     background: var(--bg-dim);
@@ -862,7 +862,7 @@ main {
 }
 .new__loan__borrower {
     display:flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap:1em;
 }
 .new__loan__form {
@@ -888,8 +888,9 @@ main {
 }
 .new__loan__plan {
     display:flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap:1em;
+    margin-top: 1em;
 }
 .new__loan__plan div {
     display:flex;
@@ -900,7 +901,7 @@ main {
     color: #2b2b2b;
 }
 .new__loan__plan div span {
-    font-size: 0.6em;
+    font-size: 1em;
 }
 .new__loan__plan div input,.new__loan__plan div select {
     padding:0.5em;
@@ -911,7 +912,9 @@ main {
 }
 .new__loan__purpose {
     display:flex;
+    justify-content:flex-start;
     gap:1em;
+    margin-top: 1em;
 }
 .new__loan__purpose div {
     display:flex;
@@ -928,16 +931,25 @@ main {
     border-radius:3px;
     width:15em;
 }
-.new__loan__calc {
-    background: var(--bg-payments);
-    color: #ffff;
-    font-size:0.9em;
-    font-weight:500;
-    padding:0.4em;
-    text-align:center;
+.new__loan__purpose select, .new__loan__purpose input {
+    padding: 0.5em;
+    border: 1px solid #2b2b2b81;
+    outline:none;
     border-radius:3px;
-    align-self: center;
-    cursor:pointer;
+}
+.new__loan__term {
+    display:flex;
+    gap:1em;
+    justify-content: flex-start;
+    margin-top:1em;
+}
+.new__loan__term div {
+    display:flex;
+    flex-direction: column;
+}
+.new__loan__term div label {
+    font-size: 0.9em;
+    color: #2b2b2b;
 }
 .new__loan__save {
     background: var(--bg-payments);
