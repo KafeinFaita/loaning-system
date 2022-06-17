@@ -843,8 +843,9 @@ main {
 .new__loan__box {
     background: #ffff;
     border-radius:4px;
-    width: fit-content;
-    height: fit-content;
+    width: 400px;
+    height: 400px;
+    overflow-y: scroll;
     padding:2em;
 }
 .new__loan__box__header {
@@ -862,6 +863,7 @@ main {
 }
 .new__loan__borrower {
     display:flex;
+    flex-direction: column;
     justify-content: flex-start;
     gap:1em;
 }
@@ -888,6 +890,7 @@ main {
 }
 .new__loan__plan {
     display:flex;
+    flex-direction: column;
     justify-content: flex-start;
     gap:1em;
     margin-top: 1em;
@@ -913,6 +916,7 @@ main {
 .new__loan__purpose {
     display:flex;
     justify-content:flex-start;
+    flex-direction: column;
     gap:1em;
     margin-top: 1em;
 }
@@ -939,6 +943,7 @@ main {
 }
 .new__loan__term {
     display:flex;
+    flex-direction: column;
     gap:1em;
     justify-content: flex-start;
     margin-top:1em;
