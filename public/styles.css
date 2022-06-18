@@ -303,14 +303,10 @@ main {
     font-weight: 600;
 }
 /* Loan Types Page */
-.loan {
-    display:flex;
-    justify-content: space-around;
-}
 .loan__title {
     font-size: var(--title-size);
     color: #2b2b2b;
-    font-weight: 500;
+    font-weight: 600;
 }
 .loan__form {
     background:#ffff;
@@ -318,6 +314,7 @@ main {
     border-radius: 4px;
     box-shadow: 5px 5px 5px #2b2b2b85;
     height: fit-content;
+    display:none;
 }
 .loan__form form {
     display:flex;
@@ -359,9 +356,10 @@ main {
 .loan__types {
     background:#ffff;
     border-radius: 3px;
-    width:65%;
+    width:100%;
     box-shadow: 5px 5px 5px #2b2b2b85;
     padding:1em;
+    margin-top:2em;
     height: fit-content;
 }
 .loan__types th {
@@ -829,7 +827,7 @@ main {
 }
 /* Loan page modal */
 .new__loan {
-    display:flex;
+    display:none;
     justify-content: center;
     align-items: center;
     background: var(--bg-dim);
