@@ -829,7 +829,7 @@ main {
 }
 /* Loan page modal */
 .new__loan {
-    display:flex;
+    display:none;
     justify-content: center;
     align-items: center;
     background: var(--bg-dim);
