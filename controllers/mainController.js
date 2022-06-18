@@ -70,6 +70,10 @@ module.exports.loans_get = async(req,res) => {
     res.render('loans');
 }
 
+module.exports.loan_application_get = async (req, res) => {
+    res.render('loan-application')
+}
+
 
 //POST
 
@@ -142,10 +146,6 @@ module.exports.profile_photo_patch = async (req, res) => {
 
 module.exports.loan_types_put = async (req, res) => {
     try {
-        // await LoanType.findByIdAndUpdate(req.params.id, {
-        //     type: req.body.type,
-        //     description: req.body.description
-        // })
 
         const loanType = await LoanType.findById(req.params.id)
         loanType.type = req.body.type
