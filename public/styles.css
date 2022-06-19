@@ -303,10 +303,23 @@ main {
     font-weight: 600;
 }
 /* Loan Types Page */
+
 .loan__title {
     font-size: var(--title-size);
     color: #2b2b2b;
     font-weight: 600;
+}
+.create__loan__type {
+    display:none;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-dim);
+    height: 100%;
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:100;
 }
 .loan__form {
     background:#ffff;
@@ -314,12 +327,22 @@ main {
     border-radius: 4px;
     box-shadow: 5px 5px 5px #2b2b2b85;
     height: fit-content;
-    display:none;
+    width: fit-content;
 }
-.loan__form form {
+.loan__form__header {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+.loan__form__close {
+    width: 1em;
+    cursor:pointer;
+}
+.loan__form__submit {
     display:flex;
     flex-direction: column;
     gap:1em;
+    margin-top:1em;
 }
 .loan__box {
     display:flex; 
@@ -347,7 +370,7 @@ main {
     font-weight: 600;
     font-size: 0.8em;
     width: 40%;
-    align-self: center;
+    align-self: flex-end;
 }
 .loan__form form button:hover {
     background: var(--bg-payments-hover);
@@ -358,12 +381,13 @@ main {
     border-radius: 3px;
     width:100%;
     box-shadow: 5px 5px 5px #2b2b2b85;
-    padding:1em;
-    margin-top:2em;
     height: fit-content;
+    border:1px solid #2b2b2b15
 }
 .loan__types th {
     font-weight: 600;
+    text-align:center;
+    padding:0.5em
 }
 .loan__types td {
     text-align: center;
@@ -417,7 +441,7 @@ main {
     width: 1em;
     filter: invert(1);
 }
-.borrower {
+.borrower,.loan {
     background: #ffff;
     border-radius: 3px;
     margin-top:1em;
