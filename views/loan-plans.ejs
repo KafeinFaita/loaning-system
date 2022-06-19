@@ -49,22 +49,25 @@
                     </form>
                 </div>
             </div>
-            <!-- end of popup -->
-            <div class="loan">
+            <div class="create__loan__type">
                 <div class="loan__form">
-                    <h1 class="loan__title">Loan Plan's Form</h1>
-
+                    <div class="loan__form__header">
+                        <h1 class="borrower__title">New Loan Plan</h1>
+                        <svg class="loan__form__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
+                        </svg>
+                    </div>
                     <form class="loan__form__submit">     
                         <div class="loan__box">
                             <label for="type">Plan (months):</label>
                             <input type="number" name="plan" id="plan" min="1" max="12" placeholder="1-12" required>
                         </div>
-
+    
                         <div class="loan__box">
                             <label for="description">Interest:</label>
                             <input type="number" name="interest" id="interest" min="1" max="100" placeholder="%" required>
                         </div>
-
+    
                         <div class="loan__box">
                             <label for="description">Monthly Over due's Penalty:</label>
                             <input type="number" name="penalty" id="penalty" min="1" max="100" placeholder="%" required>
@@ -73,8 +76,30 @@
                         <button>Save</button>
                     </form>
                 </div>
-
-
+            </div>
+            <!-- end of popup -->
+            <div class="borrower__header">
+                <h1 class="borrower__title">Loan Plan</h1>
+                <button class="borrower__add__borrower"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/></svg>New Loan Plan</button>
+            </div>
+            <!-- Pagination Control -->
+            <%- include('./partials/pagination.ejs') %>
+            <div class="loan">
+                <div class="borrower__filter">
+                    <div class="borrower__entries">
+                        <h2 class="borrower__entries__show">
+                            Show
+                            <select>
+                                <option value="1">1</option>
+                            </select>
+                            entries 
+                        </h2>
+                    </div>
+                    <form class="borrower__search__form">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" placeholder="Search..." required>
+                    </form>
+                </div> 
                 <table class="loan__types">
                     <tr>
                         <th>#</th>
@@ -187,8 +212,17 @@
         })
 
         // LOAN PLAN FORM
-
+        const openLoanPlanBtn = document.querySelector('.borrower__add__borrower');
+        const closeLoanPlanBtn = document.querySelector('.loan__form__close');
+        const loanPlanForm = document.querySelector('.create__loan__type');
         const form = document.querySelector('.loan__form__submit')
+
+        openLoanPlanBtn.addEventListener('click', () => {
+            loanPlanForm.style.display = 'flex';
+        })
+        closeLoanPlanBtn.addEventListener('click', () => {
+            loanPlanForm.style.display = 'none';
+        })
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
