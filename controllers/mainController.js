@@ -1,8 +1,12 @@
 const User = require('../models/User')
 const LoanType = require('../models/LoanType')
 const LoanPlan = require('../models/LoanPlan')
+const LoanApplication = require('../models/LoanApplication')
+
+const dayjs = require('dayjs')
 const decode = require('jwt-decode')
 const fs = require('fs')
+
 
 module.exports.index_get = (req, res) => {
     res.render('index')
@@ -28,8 +32,10 @@ module.exports.profile_get = async (req, res) => {
     const decodedToken = decode(req.cookies.jwt)
 
     try {
-        const { password, __v0, ...data } = await User.findById(decodedToken.id).lean()
-        res.render('profile', { user: data })
+        const { password, __v0, membershipDate, ...data } = await User.findById(decodedToken.id).lean()
+        const date = dayjs(membershipDate).format('MMM D, YYYY')
+        // console.log(dayjs(new Date()).diff(dayjs(membershipDate), 'year'))
+        res.render('profile', { user: data, membershipDate: date })
     } catch (error) {
         console.log(error)
     }
@@ -67,7 +73,19 @@ module.exports.payment_get = async(req,res) => {
 }
 
 module.exports.loans_get = async(req,res) => {
-    res.render('loans');
+
+    const userToken = decode(req.cookies.jwt)
+
+    try {
+        const user = await User.findById(userToken.id)
+        const loanTypes = await LoanType.find()
+        const memberYears = dayjs(new Date()).diff(user.membershipDate, 'year')
+
+        res.render('loans', { name: user.fullname, types: loanTypes, memberYears });
+    } catch (error) {
+        
+    }
+   
 }
 
 module.exports.loan_application_get = async (req, res) => {
@@ -94,6 +112,16 @@ module.exports.loan_plans_post = async (req, res) => {
     try {
         await loanPlan.save()
         res.status(201).json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.loan_application_post = async (req, res) => {
+    const userToken = decode(req.cookies.jwt)
+
+    try {
+        const user = await User.findById(userToken.id)
     } catch (error) {
         console.log(error)
     }
@@ -171,6 +199,8 @@ module.exports.loan_plans_put = async (req, res) => {
         console.log(error)
     }
 }
+
+
 
 
 //DELETE

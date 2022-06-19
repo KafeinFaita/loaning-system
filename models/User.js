@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const dayjs = require('dayjs')
 
 const userSchema = new Schema({
     username: {
@@ -17,6 +18,10 @@ const userSchema = new Schema({
     fullname: {
         type: String,
         default: ""
+    },
+    membershipDate: {
+        type: Date,
+        default: dayjs(new Date(2010, 1, 12)).toDate()
     },
     email: {
         type: String,
