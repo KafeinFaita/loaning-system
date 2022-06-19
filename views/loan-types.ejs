@@ -92,7 +92,7 @@
                         <th>Action</th>
                     </tr>
                     <% if (loanTypes.length > 0) { %>
-                        <% loanTypes.slice(0,5).forEach((lt,key) => { %>
+                        <% loanTypes.forEach((lt,key) => { %>
                             <% const id = lt._id %>
                             <tr>
                                 <td><%- key + 1 %></td>

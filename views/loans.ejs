@@ -21,43 +21,43 @@
                         <div class="new__loan__borrower">
                             <div>
                                 <label for="date_of_loan_application">Date of Loan Application:</label>
-                                <span>June 17, 2022</span>
+                                <input type="text" name="date_of_loan_application" value="<%- new Date().toISOString().slice(0, 10) %>" readonly>
                             </div>
                             <div>
                                 <label for="member_name">Member's Name:</label>
-                                <span>Andres, Lynyrd De Ocampo</span>
+                                <input type="text" name="member_name" value="<%- name %>" readonly>
                             </div>
                             <div>
                                 <label for="date_of_membership">Date of Membership:</label>
-                                <span>June 17, 2022</span>
+                                <input type="text" name="date_of_membership" value="<%- new Date(2001, 12, 21).toISOString().slice(0, 10) %>" readonly>
                             </div>
                         </div>
                         <div class="new__loan__plan">
                             <div>
                                 <label for="number_of_years_as_member">Number of Years as Member:</label>
-                                <span>7</span>
+                                <input type="number" name="number_of_years_as_member" id="number_of_years_as_member" value="<%- memberYears %>" readonly>
                             </div>
                             <div>
-                                <label for="loan_amount">Maximum Loanable Amount:</label>
-                                <span>100,000.00</span>
+                                <label for="max_amount">Maximum Loanable Amount:</label>
+                                <input type="number" name="max_amount" id="max_amount" readonly>
                             </div>
                             <div>
                                 <label for="interest_rate_per_annum">Interest Rate Per Annum</label>
-                                <span>3</span>
+                                <input type="number" name="interest_rate_per_annum" id="interest_rate_per_annum" readonly>
                             </div>
                         </div>
                         <div class="new__loan__term">
                             <div>
                                 <label for="number_of_comakers">Required Number of Co-Makers:</label>
-                                <span>4</span>
+                                <input type="number" name="number_of_comakers" id="number_of_comakers" readonly>
                             </div>
                             <div>
                                 <label for="max_term">Max Payment Terms (in years):</label>
-                                <span>2</span>
+                                <input type="number" name="max_term" id="max_term" readonly>
                             </div>
                             <div>
                                 <label for="processing_fee">Processing Fee (Php):</label>
-                                <span>550.00</span>
+                                <input type="number" name="processing_fee" id="processing_fee" readonly>
                             </div>
                         </div>
                         <div class="new__loan__purpose">
@@ -65,7 +65,10 @@
                                 <label for="loan_to_apply">Loan to Apply:</label>
                                 <select name="loan_to_apply" id="loan_to_apply">
                                     <option hidden>Select Loan</option>
-                                    <option value="Calamity Loan">Calamity Loan</option>
+                                    <!-- <option value="Calamity Loan">Calamity Loan</option> -->
+                                    <% types.forEach(type => { %>
+                                        <option value="<%- type._id %>"><%- type.type %></option>
+                                    <% }) %>
                                 </select>
                             </div>
                             <div>
@@ -194,6 +197,7 @@
         </main>
     </div>
     <script>
+        console.log(new Date() - new Date(2005, 1, 12))
         const newLoanModal = document.querySelector('.new__loan');
         const closeNewLoanModalBtn = document.querySelector('.new__loan__close');
         const openNewLoanModalBtn = document.querySelector('.borrower__add__borrower');
@@ -232,6 +236,100 @@
         closeNewLoanModalBtn.addEventListener('click',() => {
             newLoanModal.style.display = 'none';
         })
+
+        //loan form
+
+        const loanForm = document.querySelector('.new__loan__form')
+
+        // loan to apply option
+
+        const loanToApply = document.getElementById('loan_to_apply')
+        const loans = JSON.parse('<%- JSON.stringify(types) %>')
+
+        loanToApply.addEventListener('change', () => {
+            const loanData = Object.values(loans).find(loan => loan._id === loanToApply.value)   
+            console.log(loanToApply.value)         
+            loanForm.interest_rate_per_annum.value = loanData.interestRate
+            loanForm.max_amount.value = loanData.maxAmount
+            
+        })
+
+        //loan amount onchange
+
+        const loanAmount = document.getElementById('loan_amount') 
+
+        const computation = () => {
+            switch(true) {
+                case (loanAmount.value <= 10000):
+                    loanForm.number_of_comakers.value = 3
+                    loanForm.max_term.value = 1
+                    loanForm.processing_fee.value = 200
+                    break
+                case (loanAmount.value > 10000 && loanAmount.value <= 30000):
+                    loanForm.number_of_comakers.value = 3
+                    loanForm.max_term.value = 1
+                    loanForm.processing_fee.value = 300
+                    break
+                case (loanAmount.value > 30000 && loanAmount.value <= 60000):
+                    loanForm.number_of_comakers.value = 3
+                    loanForm.max_term.value = 1
+                    loanForm.processing_fee.value = 450
+                    break
+                case (loanAmount.value > 60000 && loanAmount.value <= 100000):
+                    loanForm.number_of_comakers.value = 4
+                    loanForm.max_term.value = 2
+                    loanForm.processing_fee.value = 550
+                    break
+                case (loanAmount.value > 100000 && loanAmount.value <= 150000):
+                    loanForm.number_of_comakers.value = 4
+                    loanForm.max_term.value = 3
+                    loanForm.processing_fee.value = 750
+                    break
+                case (loanAmount.value > 150000 && loanAmount.value <= 200000):
+                    loanForm.number_of_comakers.value = 4
+                    loanForm.max_term.value = 3
+                    loanForm.processing_fee.value = 850
+                    break
+                case (loanAmount.value > 200000 && loanAmount.value <= 300000):
+                    loanForm.number_of_comakers.value = 5
+                    loanForm.max_term.value = 4
+                    loanForm.processing_fee.value = 1050
+                    break
+                case (loanAmount.value > 300000 && loanAmount.value <= 400000):
+                    loanForm.number_of_comakers.value = 6
+                    loanForm.max_term.value = 5
+                    loanForm.processing_fee.value = 1350
+                    break
+                case (loanAmount.value > 400000 && loanAmount.value <= 500000):
+                    loanForm.number_of_comakers.value = 7
+                    loanForm.max_term.value = 6
+                    loanForm.processing_fee.value = 1450
+                    break
+                case (loanAmount.value > 500000 && loanAmount.value <= 600000):
+                    loanForm.number_of_comakers.value = 8
+                    loanForm.max_term.value = 7
+                    loanForm.processing_fee.value = 1550
+                    break
+                case (loanAmount.value > 600000 && loanAmount.value <= 800000):
+                    loanForm.number_of_comakers.value = 8
+                    loanForm.max_term.value = 8
+                    loanForm.processing_fee.value = 1750
+                    break
+                case (loanAmount.value > 800000 && loanAmount.value <= 1000000):
+                    loanForm.number_of_comakers.value = 10
+                    loanForm.max_term.value = 10
+                    loanForm.processing_fee.value = 2050
+                    break
+                default: 
+                    loanForm.number_of_comakers.value = null
+                    loanForm.max_term.value = null
+                    loanForm.processing_fee.value = null
+            }
+        }
+
+        loanAmount.addEventListener('keyup', computation)
+        loanAmount.addEventListener('change', computation)
+
     </script>
 </body>
 </html>
