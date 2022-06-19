@@ -37,6 +37,17 @@
     box-sizing:border-box;
     font-family: 'Poppins', sans-serif;
 }
+/* Pagination */
+.pagination ul {
+    display:flex;
+    gap:1em;
+}
+.pagination ul li {
+    font-size: 0.8em;
+    color: var(--bg-payments);
+    cursor:pointer;
+    list-style: none;
+}
 /* Login page and Signup page */
 .login {
     color: #2b2b2b;
@@ -283,9 +294,12 @@ main {
 .users__table {
     width: 100%;
     height:fit-content;
+    border:1px solid #2b2b2b15
 }
 .users__table th {
     font-weight: 600;
+    text-align:center;
+    padding:0.5em;
 }
 .users__table td {
     text-align:center;
