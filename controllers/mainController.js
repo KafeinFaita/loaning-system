@@ -32,9 +32,9 @@ module.exports.profile_get = async (req, res) => {
     const decodedToken = decode(req.cookies.jwt)
 
     try {
-        const { password, __v0, membershipDate, ...data } = await User.findById(decodedToken.id).lean()
+        const { password, __v0, membershipDate, loan, ...data } = await User.findById(decodedToken.id).populate('loan').lean()
+        console.log(loan)
         const date = dayjs(membershipDate).format('MMM D, YYYY')
-        // console.log(dayjs(new Date()).diff(dayjs(membershipDate), 'year'))
         res.render('profile', { user: data, membershipDate: date })
     } catch (error) {
         console.log(error)
@@ -79,9 +79,10 @@ module.exports.loans_get = async(req,res) => {
     try {
         const user = await User.findById(userToken.id)
         const loanTypes = await LoanType.find()
+        const loanApplications = await LoanApplication.find().populate('member loanType')
         const memberYears = dayjs(new Date()).diff(user.membershipDate, 'year')
 
-        res.render('loans', { name: user.fullname, types: loanTypes, memberYears });
+        res.render('loans', { name: user.fullname, types: loanTypes, memberYears, loanApplications });
     } catch (error) {
         
     }
@@ -122,6 +123,21 @@ module.exports.loan_application_post = async (req, res) => {
 
     try {
         const user = await User.findById(userToken.id)
+        const loanApplication = new LoanApplication({ 
+            applicationDate: dayjs().toDate(),
+            member: user._id,
+            loanType: req.body.loanType,
+            coMakers: req.body.coMakers,
+            maxPaymentTerms: req.body.maxPaymentTerms,
+            loanAmount: req.body.loanAmount,
+            purpose: req.body.purpose
+         })
+         user.loan = loanApplication._id
+
+         await user.save()
+         await loanApplication.save()
+
+         res.json('ok')
     } catch (error) {
         console.log(error)
     }

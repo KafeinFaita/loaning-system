@@ -9,7 +9,8 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     photoPath: {
         type: String,
@@ -34,6 +35,10 @@ const userSchema = new Schema({
     contact: {
         type: Number, 
         default: 0
+    },
+    role: {
+        type: String,
+        default: 'admin'
     },
     messages: [{
         from: String,

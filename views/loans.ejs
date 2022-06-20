@@ -161,39 +161,34 @@
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>
-                            <span>Name: Andres, Paul D.</span>
-                            <span>Address: Sample Address</span>
-                            <span>Contact #: 09214231007</span>
-                            <span>Email: polopdoandres@gmail.com</span>
-                            <span>Tax ID: 78908-32</span>
-                        </td>
-                        <td>None</td>
-                        <td>N/A</td>
-                        <td>Released</td>
-                        <td>
-                            <button class="loan__types__edit">Edit</button>
-                            <button class="loan__types__delete">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <span>Name: Andres, Paul D.</span>
-                            <span>Address: Sample Address</span>
-                            <span>Contact #: 09214231007</span>
-                            <span>Email: polopdoandres@gmail.com</span>
-                            <span>Tax ID: 78908-32</span>
-                        </td>
-                        <td>None</td>
-                        <td>N/A</td>
-                        <td>Released</td>
-                        <td>
-                            <button class="loan__types__edit">Edit</button>
-                            <button class="loan__types__delete">Delete</button>
-                        </td>
-                    </tr>
+
+                    <% if (loanApplications.length > 0) { %>
+                        <% loanApplications.forEach((ap, x) => { %>
+                            <tr>
+                            
+                                <td><%= x + 1 %></td>
+                                <td>
+                                    <span>Name: <%= loanApplications[x].member.fullname %></span>
+                                    <span>Address: <%= loanApplications[x].member.address %></span>
+                                    <span>Contact #: <%= loanApplications[x].member.contact %></span>
+                                    <span>Email: <%= loanApplications[x].member.email %></span>
+                                </td>
+                                <td>
+                                    <span>Loan Type: <%= loanApplications[x].loanType.type %></span>
+                                    <span>Loan Amount: <%= loanApplications[x].loanAmount %></span>
+                                    <span>Interest Rate: <%= loanApplications[x].loanType.interestRate %></span>
+                                    <span>Co-Makers: <%= loanApplications[x].coMakers %></span>
+                                    <span>Max Payment Terms: <%= loanApplications[x].maxPaymentTerms %></span>
+                                </td>
+                                <td>N/A</td>
+                                <td>Released</td>
+                                <td>
+                                    <button class="loan__types__edit">Edit</button>
+                                    <button class="loan__types__delete">Delete</button>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>  
                 </table>
             </div>
         </main>
@@ -331,6 +326,32 @@
 
         loanAmount.addEventListener('keyup', computation)
         loanAmount.addEventListener('change', computation)
+
+        //loanForm save event
+
+        loanForm.addEventListener('submit', async e => {
+
+            e.preventDefault()
+
+            const loanType = loanForm.loan_to_apply.value
+            const coMakers = loanForm.number_of_comakers.value
+            const maxPaymentTerms = loanForm.max_term.value
+            const processingFee = loanForm.processing_fee.value
+            const loanAmount = loanForm.loan_amount.value
+            const purpose = loanForm.purpose.value
+
+            try {
+                const response = await fetch('/loans', {
+                    method: 'POST',
+                    body: JSON.stringify({ loanType, coMakers, maxPaymentTerms, processingFee, loanAmount, purpose }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const data = await response.json()
+                if (data === 'ok') location.reload()
+            } catch (error) {
+                console.log(error)
+            }
+        })
 
     </script>
 </body>

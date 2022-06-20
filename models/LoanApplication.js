@@ -4,14 +4,14 @@ const Schema = mongoose.Schema
 const loanApplicationSchema = new Schema({
     applicationDate: {
         type: Date,
-        default: Date.now()
+        default: new Date()
     },
     member: {
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
     loanType: {
-        type: Schema. Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'loan-type'
     },
     coMakers: {
