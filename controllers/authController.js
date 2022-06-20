@@ -29,7 +29,7 @@ module.exports.signup_post = async (req, res) => {
 }
 
 module.exports.login_post = async (req, res) => {
-    const user = await User.findOne({ username: req.body.username })
+    const user = await User.findOne({ username: req.body.username }).select('password')
 
     if (user) {
         const auth = await bcrypt.compare(req.body.password, user.password)
