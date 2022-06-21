@@ -8,82 +8,7 @@
         <main>
 
             <!-- Popup Modals -->
-            <div class="new__loan">
-                <div class="new__loan__box">
-                    <div class="new__loan__box__header">
-                        <h2 class="new__loan__title">New Loan</h2>
-                        <svg class="new__loan__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                            <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/>
-                        </svg>
-                    </div>
-
-                    <form class="new__loan__form">
-                        <div class="new__loan__borrower">
-                            <div>
-                                <label for="date_of_loan_application">Date of Loan Application:</label>
-                                <input type="text" name="date_of_loan_application" value="<%- new Date().toISOString().slice(0, 10) %>" readonly>
-                            </div>
-                            <div>
-                                <label for="member_name">Member's Name:</label>
-                                <input type="text" name="member_name" value="<%- name %>" readonly>
-                            </div>
-                            <div>
-                                <label for="date_of_membership">Date of Membership:</label>
-                                <input type="text" name="date_of_membership" value="<%- new Date(2001, 12, 21).toISOString().slice(0, 10) %>" readonly>
-                            </div>
-                        </div>
-                        <div class="new__loan__plan">
-                            <div>
-                                <label for="number_of_years_as_member">Number of Years as Member:</label>
-                                <input type="number" name="number_of_years_as_member" id="number_of_years_as_member" value="<%- memberYears %>" readonly>
-                            </div>
-                            <div>
-                                <label for="max_amount">Maximum Loanable Amount:</label>
-                                <input type="number" name="max_amount" id="max_amount" readonly>
-                            </div>
-                            <div>
-                                <label for="interest_rate_per_annum">Interest Rate Per Annum</label>
-                                <input type="number" name="interest_rate_per_annum" id="interest_rate_per_annum" readonly>
-                            </div>
-                        </div>
-                        <div class="new__loan__term">
-                            <div>
-                                <label for="number_of_comakers">Required Number of Co-Makers:</label>
-                                <input type="number" name="number_of_comakers" id="number_of_comakers" readonly>
-                            </div>
-                            <div>
-                                <label for="max_term">Max Payment Terms (in years):</label>
-                                <input type="number" name="max_term" id="max_term" readonly>
-                            </div>
-                            <div>
-                                <label for="processing_fee">Processing Fee (Php):</label>
-                                <input type="number" name="processing_fee" id="processing_fee" readonly>
-                            </div>
-                        </div>
-                        <div class="new__loan__purpose">
-                            <div>
-                                <label for="loan_to_apply">Loan to Apply:</label>
-                                <select name="loan_to_apply" id="loan_to_apply">
-                                    <option hidden>Select Loan</option>
-                                    <!-- <option value="Calamity Loan">Calamity Loan</option> -->
-                                    <% types.forEach(type => { %>
-                                        <option value="<%- type._id %>"><%- type.type %></option>
-                                    <% }) %>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="loan_amount">Loan Amount:</label>
-                                <input type="number" name="loan_amount" id="loan_amount">
-                            </div>
-                            <div>
-                                <label for="purpose">Purpose:</label>
-                                <textarea name="purpose" id="purpose" cols="30" rows="5"></textarea>
-                            </div> 
-                        </div>
-                        <button class="new__loan__save">Save</button>
-                    </form>
-                </div>
-            </div>
+            
 
             <div class="delete">
                 <div class="delete__box">
@@ -127,10 +52,6 @@
 
             <div class="borrower__header">
                 <h1 class="borrower__title">Loans</h1>
-                <button class="borrower__add__borrower">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
-                    </svg>Create New Application</button>
             </div>
             <!-- Pagination Control -->
             <%- include('./partials/pagination.ejs') %>
@@ -195,9 +116,7 @@
     </div>
     <script>
         console.log(new Date() - new Date(2005, 1, 12))
-        const newLoanModal = document.querySelector('.new__loan');
-        const closeNewLoanModalBtn = document.querySelector('.new__loan__close');
-        const openNewLoanModalBtn = document.querySelector('.borrower__add__borrower');
+        
 
         const deleteLoanModal = document.querySelector('.delete');
         const openDeleteLoanModalBtns = document.querySelectorAll('.loan__types__delete');
@@ -225,133 +144,7 @@
             deleteLoanModal.style.display = 'none';
         });
         
-
-
-        openNewLoanModalBtn.addEventListener('click', () => {
-            newLoanModal.style.display = 'flex';
-        });
-        closeNewLoanModalBtn.addEventListener('click',() => {
-            newLoanModal.style.display = 'none';
-        })
-
-        //loan form
-
-        const loanForm = document.querySelector('.new__loan__form')
-
-        // loan to apply option
-
-        const loanToApply = document.getElementById('loan_to_apply')
-        const loans = JSON.parse('<%- JSON.stringify(types) %>')
-
-        loanToApply.addEventListener('change', () => {
-            const loanData = Object.values(loans).find(loan => loan._id === loanToApply.value)   
-            console.log(loanToApply.value)         
-            loanForm.interest_rate_per_annum.value = loanData.interestRate
-            loanForm.max_amount.value = loanData.maxAmount
-            
-        })
-
-        //loan amount onchange
-
-        const loanAmount = document.getElementById('loan_amount') 
-
-        const computation = () => {
-            switch(true) {
-                case (loanAmount.value <= 10000):
-                    loanForm.number_of_comakers.value = 3
-                    loanForm.max_term.value = 1
-                    loanForm.processing_fee.value = 200
-                    break
-                case (loanAmount.value > 10000 && loanAmount.value <= 30000):
-                    loanForm.number_of_comakers.value = 3
-                    loanForm.max_term.value = 1
-                    loanForm.processing_fee.value = 300
-                    break
-                case (loanAmount.value > 30000 && loanAmount.value <= 60000):
-                    loanForm.number_of_comakers.value = 3
-                    loanForm.max_term.value = 1
-                    loanForm.processing_fee.value = 450
-                    break
-                case (loanAmount.value > 60000 && loanAmount.value <= 100000):
-                    loanForm.number_of_comakers.value = 4
-                    loanForm.max_term.value = 2
-                    loanForm.processing_fee.value = 550
-                    break
-                case (loanAmount.value > 100000 && loanAmount.value <= 150000):
-                    loanForm.number_of_comakers.value = 4
-                    loanForm.max_term.value = 3
-                    loanForm.processing_fee.value = 750
-                    break
-                case (loanAmount.value > 150000 && loanAmount.value <= 200000):
-                    loanForm.number_of_comakers.value = 4
-                    loanForm.max_term.value = 3
-                    loanForm.processing_fee.value = 850
-                    break
-                case (loanAmount.value > 200000 && loanAmount.value <= 300000):
-                    loanForm.number_of_comakers.value = 5
-                    loanForm.max_term.value = 4
-                    loanForm.processing_fee.value = 1050
-                    break
-                case (loanAmount.value > 300000 && loanAmount.value <= 400000):
-                    loanForm.number_of_comakers.value = 6
-                    loanForm.max_term.value = 5
-                    loanForm.processing_fee.value = 1350
-                    break
-                case (loanAmount.value > 400000 && loanAmount.value <= 500000):
-                    loanForm.number_of_comakers.value = 7
-                    loanForm.max_term.value = 6
-                    loanForm.processing_fee.value = 1450
-                    break
-                case (loanAmount.value > 500000 && loanAmount.value <= 600000):
-                    loanForm.number_of_comakers.value = 8
-                    loanForm.max_term.value = 7
-                    loanForm.processing_fee.value = 1550
-                    break
-                case (loanAmount.value > 600000 && loanAmount.value <= 800000):
-                    loanForm.number_of_comakers.value = 8
-                    loanForm.max_term.value = 8
-                    loanForm.processing_fee.value = 1750
-                    break
-                case (loanAmount.value > 800000 && loanAmount.value <= 1000000):
-                    loanForm.number_of_comakers.value = 10
-                    loanForm.max_term.value = 10
-                    loanForm.processing_fee.value = 2050
-                    break
-                default: 
-                    loanForm.number_of_comakers.value = null
-                    loanForm.max_term.value = null
-                    loanForm.processing_fee.value = null
-            }
-        }
-
-        loanAmount.addEventListener('keyup', computation)
-        loanAmount.addEventListener('change', computation)
-
-        //loanForm save event
-
-        loanForm.addEventListener('submit', async e => {
-
-            e.preventDefault()
-
-            const loanType = loanForm.loan_to_apply.value
-            const coMakers = loanForm.number_of_comakers.value
-            const maxPaymentTerms = loanForm.max_term.value
-            const processingFee = loanForm.processing_fee.value
-            const loanAmount = loanForm.loan_amount.value
-            const purpose = loanForm.purpose.value
-
-            try {
-                const response = await fetch('/loans', {
-                    method: 'POST',
-                    body: JSON.stringify({ loanType, coMakers, maxPaymentTerms, processingFee, loanAmount, purpose }),
-                    headers: { 'Content-Type': 'application/json' }
-                })
-                const data = await response.json()
-                if (data === 'ok') location.reload()
-            } catch (error) {
-                console.log(error)
-            }
-        })
+        
 
     </script>
 </body>
