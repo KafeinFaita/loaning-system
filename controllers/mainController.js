@@ -18,10 +18,13 @@ module.exports.signup_get = (req, res) => {
 
 module.exports.users_get = async (req, res) => {
     try {
-        const users = await User.find()
+        const page = req.query.page - 1
+
+        const users = await User.find().skip(page * 5).limit(5)
+        const userCount = await User.find().countDocuments({})
         const names = users.map(user => user.username)
        
-        res.render('users', { names, test: "asd" })
+        res.render('users', { names, pages: Math.ceil(userCount/5), currentPage: req.query.page || 1 })
     } catch (error) {
         console.log(error)
     }
@@ -48,8 +51,11 @@ module.exports.dashboard_get = (req, res) => {
 module.exports.loan_types_get = async (req, res) => {
 
     try {
-        const loanTypes = await LoanType.find()
-        res.render('loan-types', { loanTypes })
+        const page = req.query.page - 1
+
+        const loanTypes = await LoanType.find().skip(page * 5).limit(5)
+        const loanTypesCount = await await LoanType.find().countDocuments({})
+        res.render('loan-types', { loanTypes, pages: Math.ceil(loanTypesCount/5), currentPage: req.query.page || 1 })
     } catch (error) {
         console.log(error)
     }

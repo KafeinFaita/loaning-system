@@ -44,10 +44,10 @@ const userSchema = new Schema({
         from: String,
         body: String
     }],
-    loan: {
+    loan: [{
         type: Schema.Types.ObjectId,
         ref: 'loan-application'
-    }
+    }]
 })
 
 module.exports = mongoose.model('user', userSchema)
