@@ -83,12 +83,15 @@ module.exports.loans_get = async(req,res) => {
     const userToken = decode(req.cookies.jwt)
 
     try {
+        const page = req.query.page - 1
+
         const user = await User.findById(userToken.id)
         const loanTypes = await LoanType.find()
-        const loanApplications = await LoanApplication.find().populate('member loanType')
+        const loanApplications = await LoanApplication.find().populate('member loanType').skip(page * 5).limit(5)
+        const loanApplicationsCount = await LoanApplication.find().countDocuments({})
         const memberYears = dayjs(new Date()).diff(user.membershipDate, 'year')
 
-        res.render('loans', { name: user.fullname, types: loanTypes, memberYears, loanApplications });
+        res.render('loans', { name: user.fullname, types: loanTypes, memberYears, loanApplications, pages: Math.ceil(loanApplicationsCount / 5), currentPage: req.query.page || 1 });
     } catch (error) {
         
     }
@@ -138,7 +141,7 @@ module.exports.loan_application_post = async (req, res) => {
             loanAmount: req.body.loanAmount,
             purpose: req.body.purpose
          })
-         user.loan = loanApplication._id
+         user.loan.push(loanApplication._id)
 
          await user.save()
          await loanApplication.save()

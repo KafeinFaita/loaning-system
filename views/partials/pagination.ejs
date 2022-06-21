@@ -1,11 +1,6 @@
 <nav class="pagination">
     <!-- Pag nasa first page, wag mo ipakita yung previous -->
     <ul>
-        <!-- <li>Previous</li>
-        <a href='?page=1'><li>1</li></a>
-        <a href='?page=2'><li>2</li></a>
-        <li>3</li>
-        <li>Next</li> -->
         <% if (pages > 1) { %>
             <% if (currentPage > 1) { %>
                 <a href='?page=<%- currentPage - 1 %>'>Previous</a>
