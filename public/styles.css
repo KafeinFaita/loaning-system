@@ -506,6 +506,10 @@ main {
     font-size: 0.9em;
     padding:1em;
 }
+.loan__details__info {
+    text-align: left;
+    font-size:0.9em;
+}
 /* Popup Edit Loan Type */
 .edit {
     background:rgba(0, 0, 0, 0.475);
