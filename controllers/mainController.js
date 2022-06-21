@@ -70,6 +70,14 @@ module.exports.loan_plans_get = async (req, res) => {
     }
 }
 
+module.exports.loan_members_get = async (req, res) => {
+    try {
+        res.render('loan-members')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports.borrowers_get = async (req,res) => {
     res.render('borrowers')
 }

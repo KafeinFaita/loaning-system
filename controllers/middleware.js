@@ -21,7 +21,7 @@ const displayUsername = (req, res, next) => {
         jwt.verify(token, 'loaning secret', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
-                res.locals.user = null
+                res.locals.username = null
                 next()
             } else {
                 const user = await User.findById(decodedToken.id)
@@ -30,7 +30,7 @@ const displayUsername = (req, res, next) => {
             }
         })
     } else {
-        res.locals.user = null
+        res.locals.username = null
         next()
     }
 }
