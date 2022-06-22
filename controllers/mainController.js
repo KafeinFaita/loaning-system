@@ -54,7 +54,7 @@ module.exports.loan_types_get = async (req, res) => {
         const page = req.query.page - 1
 
         const loanTypes = await LoanType.find().skip(page * 5).limit(5)
-        const loanTypesCount = await await LoanType.find().countDocuments({})
+        const loanTypesCount = await LoanType.find().countDocuments({})
         res.render('loan-types', { loanTypes, pages: Math.ceil(loanTypesCount/5), currentPage: req.query.page || 1 })
     } catch (error) {
         console.log(error)
@@ -71,8 +71,25 @@ module.exports.loan_plans_get = async (req, res) => {
 }
 
 module.exports.loan_members_get = async (req, res) => {
+    const userToken = decode(req.cookies.jwt)
     try {
-        res.render('loan-members')
+        const page = req.query.page - 1
+
+        const loanTypes = await LoanType.find()
+
+        const user = await User.findOne({ _id: userToken.id }, { loan: {$slice:[(page * 5), 5]} }).populate({
+            path: 'loan',
+            populate: {
+                path: 'loanType'
+            }
+        })
+        const loanCount = await User.findById(userToken.id)
+
+        console.log(user)
+   
+        const memberYears = dayjs(new Date()).diff(user.membershipDate, 'year')
+
+        res.render('loan-members', { name: user.fullname, types: loanTypes, memberLoans: user.loan, memberYears, pages: Math.ceil(loanCount.loan.length / 5), currentPage: req.query.page || 1 });
     } catch (error) {
         console.log(error)
     }
@@ -93,15 +110,15 @@ module.exports.loans_get = async(req,res) => {
     try {
         const page = req.query.page - 1
 
-        const user = await User.findById(userToken.id)
-        const loanTypes = await LoanType.find()
+        // const user = await User.findById(userToken.id)
+        // const loanTypes = await LoanType.find()
         const loanApplications = await LoanApplication.find().populate('member loanType').skip(page * 5).limit(5)
         const loanApplicationsCount = await LoanApplication.find().countDocuments({})
-        const memberYears = dayjs(new Date()).diff(user.membershipDate, 'year')
+        // const memberYears = dayjs(new Date()).diff(user.membershipDate, 'year')
 
-        res.render('loans', { name: user.fullname, types: loanTypes, memberYears, loanApplications, pages: Math.ceil(loanApplicationsCount / 5), currentPage: req.query.page || 1 });
+        res.render('loans', { loanApplications, pages: Math.ceil(loanApplicationsCount / 5), currentPage: req.query.page || 1 });
     } catch (error) {
-        
+        console.log(error)
     }
    
 }
@@ -227,6 +244,17 @@ module.exports.loan_plans_put = async (req, res) => {
             interest: req.body.interest,
             overduePenalty: req.body.penalty
         })
+        res.json('ok')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.loans_patch = async (req, res) => {
+    try {
+        const loan = await LoanApplication.findById(req.params.id)
+        loan.status = req.body.status
+        await loan.save()
         res.json('ok')
     } catch (error) {
         console.log(error)

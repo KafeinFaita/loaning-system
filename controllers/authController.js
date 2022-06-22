@@ -17,7 +17,7 @@ module.exports.signup_post = async (req, res) => {
     if (req.body.username.length <= 6 || req.body.password.length <= 6) return res.status(409).json('Username and/or password must be 7 characters or longer.')
 
     const hashedPass = await bcrypt.hash(req.body.password, 10)
-    const newUser = new User({ username: req.body.username, password: hashedPass })
+    const newUser = new User({ username: req.body.username, password: hashedPass, role: req.body.role })
 
     try {
         await newUser.save()

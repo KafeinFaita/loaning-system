@@ -22,7 +22,7 @@ const userSchema = new Schema({
     },
     membershipDate: {
         type: Date,
-        default: dayjs(new Date(2010, 1, 12)).toDate()
+        default: dayjs().toDate()
     },
     email: {
         type: String,
@@ -38,7 +38,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        default: 'admin'
+        default: 'member'
     },
     messages: [{
         from: String,

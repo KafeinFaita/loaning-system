@@ -102,10 +102,19 @@
                                     <p>Max Payment Terms: <%= loanApplications[x].maxPaymentTerms %></p>
                                 </td>
                                 <td>N/A</td>
-                                <td>Released</td>
+                                <td><%= loanApplications[x].status %></td>
                                 <td>
-                                    <button class="loan__types__edit">Edit</button>
-                                    <button class="loan__types__delete">Delete</button>
+                                    <!-- <button class="loan__types__edit">Edit</button>
+                                    <button class="loan__types__delete">Delete</button> -->
+                                    <form class="application_status_form">
+                                        <select name="application_status" class="application_status">
+                                            <option hidden>Select one</option>
+                                            <option value="approved">Approve</option>
+                                            <option value="disapproved">Disapprove</option>
+                                        </select>
+                                        <button name="submit_btn" class="submit_status" data-id="<%= loanApplications[x]._id %>">Submit</button>
+                                    </form>
+                                    
                                 </td>
                             </tr>
                         <% }) %>
@@ -118,33 +127,58 @@
         console.log(new Date() - new Date(2005, 1, 12))
         
 
-        const deleteLoanModal = document.querySelector('.delete');
-        const openDeleteLoanModalBtns = document.querySelectorAll('.loan__types__delete');
-        const closeDeleteLoanModalBtn = document.querySelector('.close__delete');
+        // const deleteLoanModal = document.querySelector('.delete');
+        // const openDeleteLoanModalBtns = document.querySelectorAll('.loan__types__delete');
+        // const closeDeleteLoanModalBtn = document.querySelector('.close__delete');
 
-        const editModal = document.querySelector('.edit');
-        const openEditModalBtns = document.querySelectorAll('.loan__types__edit');
-        const closeEditModalBtn = document.querySelector('.edit__close');
+        // const editModal = document.querySelector('.edit');
+        // const openEditModalBtns = document.querySelectorAll('.loan__types__edit');
+        // const closeEditModalBtn = document.querySelector('.edit__close');
 
-        openEditModalBtns.forEach(editBtn => {
-            editBtn.addEventListener('click', () => {
-                editModal.style.display = 'flex';
+        // openEditModalBtns.forEach(editBtn => {
+        //     editBtn.addEventListener('click', () => {
+        //         editModal.style.display = 'flex';
+        //     })
+        // })
+        // closeEditModalBtn.addEventListener('click',() => {
+        //     editModal.style.display = 'none';
+        // })
+
+        // openDeleteLoanModalBtns.forEach(openDeleteLoanModalBtn => {
+        //     openDeleteLoanModalBtn.addEventListener('click', () => {
+        //         deleteLoanModal.style.display = 'flex';
+        //     });
+        // });
+        // closeDeleteLoanModalBtn.addEventListener('click', () => {
+        //     deleteLoanModal.style.display = 'none';
+        // });
+        
+        const applicationStatusForm = document.querySelectorAll('.application_status_form')
+        // const applicationStatus = document.querySelectorAll = ('.application_status')
+        
+        applicationStatusForm.forEach(form => {
+            form.addEventListener('submit', async e => {
+                e.preventDefault()
+
+                const applicationStatus = form.application_status.value
+                const appId = form.submit_btn.getAttribute('data-id')
+
+                try {
+                    const response = await fetch(`/loans/${appId}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ status: applicationStatus }),
+                    headers: { 'Content-Type': 'application/json' }
+
+                    })
+                    const data = await response.json()
+
+                    if (data === 'ok') location.reload()
+
+                } catch (error) {
+                    console.log(error)
+                }
             })
         })
-        closeEditModalBtn.addEventListener('click',() => {
-            editModal.style.display = 'none';
-        })
-
-        openDeleteLoanModalBtns.forEach(openDeleteLoanModalBtn => {
-            openDeleteLoanModalBtn.addEventListener('click', () => {
-                deleteLoanModal.style.display = 'flex';
-            });
-        });
-        closeDeleteLoanModalBtn.addEventListener('click', () => {
-            deleteLoanModal.style.display = 'none';
-        });
-        
-        
 
     </script>
 </body>

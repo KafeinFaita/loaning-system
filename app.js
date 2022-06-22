@@ -41,6 +41,9 @@ app.use(getRoutes)
 app.use(postRoutes)
 app.use(putPatchRoutes)
 app.use(deleteRoutes)
+app.get('*', (req, res) => {
+    res.send('404')
+})
 
 
 

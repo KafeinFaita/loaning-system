@@ -30,6 +30,10 @@ const loanApplicationSchema = new Schema({
         type: Number,
         default: 0
     },
+    status: {
+        type: String,
+        default: "processing"
+    },
     purpose: String
 })
 

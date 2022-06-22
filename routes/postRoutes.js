@@ -9,7 +9,7 @@ router.post('/signup', signup_post)
 router.post('/', login_post)
 router.post('/loan-types', loan_types_post)
 router.post('/loan-plans', loan_plans_post)
-router.post('/loans', loan_application_post)
+router.post('/loan-members', loan_application_post)
 
 
 module.exports = router

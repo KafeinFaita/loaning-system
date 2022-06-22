@@ -22,15 +22,18 @@ const displayUsername = (req, res, next) => {
             if (err) {
                 console.log(err.message)
                 res.locals.username = null
+                res.locals.role = null
                 next()
             } else {
                 const user = await User.findById(decodedToken.id)
                 res.locals.username = user.username
+                res.locals.role = user.role
                 next()
             }
         })
     } else {
         res.locals.username = null
+        res.locals.role = null
         next()
     }
 }
@@ -47,6 +50,31 @@ const requireAuth = (req, res, next) => {
         })
     } else {
         return res.redirect('/')
+    }
+}
+
+//for role auth
+const checkRole = (role) => {
+    return (req, res, next) => {
+        const token = req.cookies.jwt
+
+        if (token) {
+            jwt.verify(token, 'loaning secret', async (err, decodedToken) => {
+                if (err) {
+                    console.log(err.message)
+                } else {
+                    let user = await User.findById(decodedToken.id)
+
+                    if (user.role === role) {
+                        next()
+                    } else {
+                        res.redirect('/profile')
+                    }     
+                }
+            })
+        } else {
+            res.redirect('/')
+        }
     }
 }
 
@@ -67,4 +95,4 @@ const checkLoginStatus = (req, res, next) => {
 }
 
 
-module.exports = { upload, displayUsername, requireAuth, checkLoginStatus }
+module.exports = { upload, displayUsername, requireAuth, checkRole, checkLoginStatus }
